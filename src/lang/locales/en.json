@@ -15,5 +15,11 @@
     "badRequest": "Bad Request",
     "connectionError": "Unable to connect to server. Please try again later.",
     "dataLoadError": "An error occurred while loading data"
+  },
+  "languages": {
+    "korea": "Korea",
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "japanese": "Japanese"
   }
 }

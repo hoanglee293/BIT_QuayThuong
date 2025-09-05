@@ -15,5 +15,11 @@
     "badRequest": "Bad Request",
     "connectionError": "Không thể kết nối đến server. Vui lòng thử lại sau.",
     "dataLoadError": "Có lỗi xảy ra khi tải dữ liệu"
+  },
+  "languages": {
+    "korea": "Korea",
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "japanese": "Japanese"
   }
 }
