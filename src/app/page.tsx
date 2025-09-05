@@ -6,9 +6,9 @@ import Lotterys from './lotterys/page';
 function HomeContent() {
 
   return (
-    <div>
+    <>
       <Lotterys />
-    </div>
+    </>
   );
 }
 

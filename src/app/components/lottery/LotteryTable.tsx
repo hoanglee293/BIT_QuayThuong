@@ -68,8 +68,8 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
   }
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="p-8">
+      <CardHeader className="p-0 pb-5">
         <CardTitle>Danh sách mã dự thưởng ({data.length} kết quả)</CardTitle>
       </CardHeader>
       <CardContent>
@@ -79,7 +79,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
               <TableRow>
                 <TableHead className="w-[100px]">ID</TableHead>
                 <TableHead className="w-[150px]">Mã dự thưởng</TableHead>
-                <TableHead className="w-[120px]">Số input</TableHead>
+                <TableHead className="w-[120px]">UID</TableHead>
                 <TableHead className="w-[150px]">Tên người dùng</TableHead>
                 <TableHead className="w-[150px]">Telegram ID</TableHead>
                 <TableHead className="w-[100px]">Trạng thái</TableHead>
@@ -95,7 +95,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">
+                      <code className=" px-2 py-1 rounded text-sm font-mono">
                         {lottery.code}
                       </code>
                       <Button
@@ -114,7 +114,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                   </TableCell>
                   <TableCell>
                     <span className="font-mono">
-                      {lottery.input_number.toLocaleString()}
+                      {lottery.input_number}
                     </span>
                   </TableCell>
                   <TableCell>

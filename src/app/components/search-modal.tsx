@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { X, Search, TrendingUp, TrendingDown } from "lucide-react"
-import { getOrderMyHistories, getSearchTokenInfor } from "@/services/api/OnChainService"
+// import { getOrderMyHistories, getSearchTokenInfor } from "@/services/api/OnChainService"
 import { useQuery } from "@tanstack/react-query"
 import { formatNumberWithSuffix3 } from "@/utils/format"
 import { useRouter } from "next/navigation"
@@ -83,8 +83,9 @@ export default function SearchModal({ isOpen, onClose, onSelectToken, searchQuer
   const { data: listToken, isLoading: isQueryLoading } = useQuery({
     queryKey: ["searchTokens", debouncedSearchInput],
     queryFn: async () => {
-      const result = await getSearchTokenInfor(debouncedSearchInput)
-      return result
+      // const result = await getSearchTokenInfor(debouncedSearchInput)
+      // return result
+      return { tokens: [], total: 0, page: 1, limit: 10 }; // Mock data
     },
     enabled: isOpen && debouncedSearchInput.length > 0,
     staleTime: 10000,

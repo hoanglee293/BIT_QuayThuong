@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { LotteryCode, LotteryResponse, LotteryFilters, Pagination } from '@/types/lottery';
+import { axiosClient } from '@/utils/axiosClient';
 
 interface UseLotteryReturn {
   data: LotteryCode[];
@@ -43,32 +44,32 @@ export const useLottery = (): UseLotteryReturn => {
 
     try {
       const queryString = buildQueryString(filters);
-      const url = `/api/v1/lotterys${queryString ? `?${queryString}` : ''}`;
+      const url = `/lotterys${queryString ? `?${queryString}` : ''}`;
       
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Include cookies for authentication
-      });
+      const response = await axiosClient.get<LotteryResponse>(url);
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error('Unauthorized - Vui lòng đăng nhập lại');
+      setData(response.data.data || []);
+      setPagination(response.data.pagination || null);
+    } catch (err: any) {
+      let errorMessage = 'Có lỗi xảy ra khi tải dữ liệu';
+      
+      if (err.response) {
+        // Server responded with error status
+        if (err.response.status === 401) {
+          errorMessage = 'Unauthorized - Vui lòng đăng nhập lại';
+        } else if (err.response.status === 400) {
+          errorMessage = err.response.data?.message || 'Bad Request';
+        } else {
+          errorMessage = err.response.data?.message || `HTTP error! status: ${err.response.status}`;
         }
-        if (response.status === 400) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Bad Request');
-        }
-        throw new Error(`HTTP error! status: ${response.status}`);
+      } else if (err.request) {
+        // Network error
+        errorMessage = 'Không thể kết nối đến server. Vui lòng thử lại sau.';
+      } else {
+        // Other error
+        errorMessage = err.message || errorMessage;
       }
-
-      const result: LotteryResponse = await response.json();
-      setData(result.data || []);
-      setPagination(result.pagination || null);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Có lỗi xảy ra khi tải dữ liệu';
+      
       setError(errorMessage);
       setData([]);
       setPagination(null);

@@ -24,7 +24,7 @@ type FormData = {
 };
 
 export default function CompleteProfile() {
-    const { payloadToken } = useAuth();
+    const { admin } = useAuth();
     const { data: walletInfor, refetch } = useQuery({
         queryKey: ["wallet-infor"],
         queryFn: getInforWallet,
@@ -37,7 +37,7 @@ export default function CompleteProfile() {
     const [toastMessage, setToastMessage] = useState('');
     const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FormData>({
         defaultValues: {
-            wallet_id: (payloadToken as any)?.wallet_id || '',
+            wallet_id: (admin as any)?.wallet_id || '',
             name: '',
             nick_name: '',
             country: "kr",

@@ -22,8 +22,8 @@ const Header = () => {
     const { t, lang } = useLang();
     const router = useRouter();
     const pathname = usePathname();
-    const { isAuthenticated, logout, admin } = useAuth();
-    const [mounted, setMounted] = useState(false);  
+    const { isAuthenticated, logout, admin, checkAuthFromStorage } = useAuth();
+    const [mounted, setMounted] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const { theme, setTheme } = useTheme();
@@ -33,33 +33,30 @@ const Header = () => {
         setIsDark(theme);
     }, [theme]);
 
-   
+
 
     useEffect(() => {
         setMounted(true);
+        // Check authentication status from localStorage on mount
+        checkAuthFromStorage();
         return () => {
             setMounted(false);
         };
-    }, []);
+    }, [checkAuthFromStorage]);
 
     const listSidebar = [
         {
-            name: "BITTWORLD CEX",
-            icon: Link2,
-            href: "https://www.bittworld.com",
-            logoPump: false,
-        },
-        {
-            name: "BITTWORLD TWITTER",
-            icon: Twitter,
-            href: "https://x.com/BittWorld776",
+            name: "Prize draw management",
+            icon: Coins,
+            href: "/lotterys",
             logoPump: false,
         }
+
     ]
     return (
         <>
             {/* NotifyProvider removed - using Toaster from ClientLayout */}
-            <header className="sticky top-0 w-full bg-white dark:bg-[#141414] border-b dark:border-none shadow-lg border-gray-200 dark:border-gray-800" style={{ zIndex: 55 }}>
+            <header className="sticky top-0 w-full bg-white dark:bg-[#141414] border-b dark:border-none shadow-lg border-gray-200 dark:border-gray-800 box-shadow-info" style={{ zIndex: 55 }}>
                 <div className='flex items-center justify-between px-4 2xl:px-10 2xl:py-2 py-1'>
                     <div className='flex w-full justify-between'>
                         <div className='flex items-center gap-[2vw]'>
@@ -76,35 +73,37 @@ const Header = () => {
                                 />
                             </Link>
                             {/* Desktop Navigation */}
-                            <nav className='hidden md:flex items-center gap-4 xl:gap-[2vw]'>
-                                {listSidebar.map((item, index) => {
-                                    const isExternalLink = item.href.startsWith('http');
-                                    const Component = isExternalLink ? 'a' : Link;
-                                    const props = isExternalLink 
-                                        ? { 
-                                            href: item.href, 
-                                            target: "_blank", 
-                                            rel: "noopener noreferrer",
-                                            className: `hover:text-theme-primary-500 2xl:text-sm text-xs capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`
-                                          }
-                                        : { 
-                                            href: item.href,
-                                            className: `hover:text-theme-primary-500 2xl:text-sm text-xs capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`
-                                          };
-                                    
-                                    return (
-                                        <Component
-                                            key={index}
-                                            {...props}
-                                        >
-                                            {item.name}
-                                        </Component>
-                                    );
-                                })}
-                            </nav>
+                            {isAuthenticated && (
+                                <nav className='hidden md:flex items-center gap-4 xl:gap-[2vw]'>
+                                    {listSidebar.map((item, index) => {
+                                        const isExternalLink = item.href.startsWith('http');
+                                        const Component = isExternalLink ? 'a' : Link;
+                                        const props = isExternalLink
+                                            ? {
+                                                href: item.href,
+                                                target: "_blank",
+                                                rel: "noopener noreferrer",
+                                                className: `hover:text-theme-primary-500 2xl:text-sm text-xs capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`
+                                            }
+                                            : {
+                                                href: item.href,
+                                                className: `hover:text-theme-primary-500 2xl:text-sm text-xs capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`
+                                            };
+
+                                        return (
+                                            <Component
+                                                key={index}
+                                                {...props}
+                                            >
+                                                {item.name}
+                                            </Component>
+                                        );
+                                    })}
+                                </nav>
+                            )}
                         </div>
 
-                        
+
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -202,7 +201,7 @@ const Header = () => {
                                         className="p-2 rounded-lg "
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
-                                        <X size={24} className="text-theme-neutral-100"/>
+                                        <X size={24} className="text-theme-neutral-100" />
                                     </button>
                                 </div>
 
@@ -212,20 +211,20 @@ const Header = () => {
                                         const Icon = item.icon;
                                         const isExternalLink = item.href.startsWith('http');
                                         const Component = isExternalLink ? 'a' : Link;
-                                        const props = isExternalLink 
-                                            ? { 
-                                                href: item.href, 
-                                                target: "_blank", 
+                                        const props = isExternalLink
+                                            ? {
+                                                href: item.href,
+                                                target: "_blank",
                                                 rel: "noopener noreferrer",
                                                 onClick: () => setIsMobileMenuOpen(false),
                                                 className: `hover:text-theme-primary-500 border-b border-white/50  text-theme-neutral-100 md:dark:text-theme-neutral-300 capitalize transition-colors text-lg py-2 flex items-center gap-3 ${pathname === item.href ? 'gradient-hover font-semibold' : ''}`
-                                              }
-                                            : { 
+                                            }
+                                            : {
                                                 href: item.href,
                                                 onClick: () => setIsMobileMenuOpen(false),
                                                 className: `hover:text-theme-primary-500 text-theme-neutral-100 border-b border-white/50  md:dark:text-theme-neutral-300 capitalize transition-colors text-lg py-2 flex items-center gap-3 ${pathname === item.href ? 'gradient-hover font-semibold' : ''}`
-                                              };
-                                        
+                                            };
+
                                         return (
                                             <Component
                                                 key={index}
@@ -291,7 +290,7 @@ const Header = () => {
                                         </div>
                                     )}
 
-                                    
+
                                 </div>
                             </div>
                         </div>

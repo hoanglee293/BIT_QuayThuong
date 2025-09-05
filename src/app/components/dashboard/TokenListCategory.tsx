@@ -6,7 +6,7 @@ import { formatNumber } from "@/utils/format";
 import { useState } from "react";
 import { useLang } from "@/lang";
 import { useRouter } from "next/navigation";
-import { getListTokenAllCategory, getTokenByCategory } from "@/services/api/SolonaTokenService";
+// import { getListTokenAllCategory, getTokenByCategory } from "@/services/api/SolonaTokenService";
 import { useQuery } from "@tanstack/react-query";
 
 // Skeleton card component for loading state
@@ -39,16 +39,18 @@ function SkeletonCard() {
 // Component to render a list of token cards
 export default function TokenListCategory({ category = "" }: any) {
   const { t } = useLang()
-  const { data: tokenAllCategory = [] } = useQuery({
-    queryKey: ["token-all-category"],
-    queryFn: () => getListTokenAllCategory(),
-  });
+  // const { data: tokenAllCategory = [] } = useQuery({
+  //   queryKey: ["token-all-category"],
+  //   queryFn: () => getListTokenAllCategory(),
+  // });
+  const tokenAllCategory: any[] = [];
 
-  const { data: tokenByCategory = [] } = useQuery({
-    queryKey: ["token-by-category", category],
-    queryFn: () => getTokenByCategory(category),
-    enabled: Boolean(category),
-  });
+  // const { data: tokenByCategory = [] } = useQuery({
+  //   queryKey: ["token-by-category", category],
+  //   queryFn: () => getTokenByCategory(category),
+  //   enabled: Boolean(category),
+  // });
+  const tokenByCategory: any[] = [];
 
   // Show skeleton loading when tokens array is empty or has length less than 1
   if ((!category && (!tokenAllCategory || tokenAllCategory.length < 1)) ||

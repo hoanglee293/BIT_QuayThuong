@@ -13,9 +13,9 @@ interface LotteryFiltersProps {
   loading?: boolean;
 }
 
-const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({ 
-  onFiltersChange, 
-  loading = false 
+const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
+  onFiltersChange,
+  loading = false
 }) => {
   const [filters, setFilters] = useState<LotteryFilters>({
     page: 1,
@@ -27,7 +27,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const handleInputChange = (field: keyof LotteryFilters, value: string) => {
-    const newFilters = { ...filters, [field]: value || undefined };
+    const newFilters = { ...filters, [field]: value === 'all' ? undefined : (value || undefined) };
     setFilters(newFilters);
   };
 
@@ -53,22 +53,22 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   };
 
   return (
-    <Card className="mb-6">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card className="mb-6 p-8">
+      <CardHeader className="p-0 pb-5">
+        <CardTitle className="flex items-center gap-2 m-0 p-0">
           <Filter className="h-5 w-5" />
           Bộ lọc mã dự thưởng
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Basic Search */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">Tìm kiếm tổng quát</label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="Tìm theo mã, số input, telegram ID..."
+                placeholder="Tìm theo mã, số UID, telegram ID..."
                 value={filters.search || ''}
                 onChange={(e) => handleInputChange('search', e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -90,30 +90,30 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
           <div className="space-y-2">
             <label className="text-sm font-medium">Trạng thái</label>
             <Select
-              value={filters.is_used || ''}
+              value={filters.is_used || 'all'}
               onValueChange={(value) => handleInputChange('is_used', value)}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Chọn trạng thái" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Tất cả</SelectItem>
+                <SelectItem value="all">Tất cả</SelectItem>
                 <SelectItem value="false">Chưa sử dụng</SelectItem>
                 <SelectItem value="true">Đã sử dụng</SelectItem>
               </SelectContent>
             </Select>
           </div>
-        </div>
-
-        {/* Advanced Filters Toggle */}
-        <div className="flex justify-between items-center">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowAdvanced(!showAdvanced)}
-          >
-            {showAdvanced ? 'Ẩn bộ lọc nâng cao' : 'Hiện bộ lọc nâng cao'}
-          </Button>
+          {/* Advanced Filters Toggle */}
+          <div className="flex items-end h-full">
+            <Button
+              variant="outline"
+              className="w-full h-10 bg-theme-primary-500 border-none hover:bg-theme-primary-500/80 text-white"
+              size="sm"
+              onClick={() => setShowAdvanced(!showAdvanced)}
+            >
+              {showAdvanced ? 'Ẩn bộ lọc nâng cao' : 'Hiện bộ lọc nâng cao'}
+            </Button>
+          </div>
         </div>
 
         {/* Advanced Filters */}
@@ -130,9 +130,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Số input</label>
+              <label className="text-sm font-medium">UID</label>
               <Input
-                placeholder="Nhập số input..."
+                placeholder="Nhập UID..."
                 value={filters.input_number || ''}
                 onChange={(e) => handleInputChange('input_number', e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -160,7 +160,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
         )}
 
         {/* Sort Options */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t">
           <div className="space-y-2">
             <label className="text-sm font-medium">Sắp xếp theo</label>
             <Select
@@ -173,7 +173,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               <SelectContent>
                 <SelectItem value="created_at">Ngày tạo</SelectItem>
                 <SelectItem value="code">Mã dự thưởng</SelectItem>
-                <SelectItem value="input_number">Số input</SelectItem>
+                <SelectItem value="input_number">UID</SelectItem>
                 <SelectItem value="is_used">Trạng thái</SelectItem>
               </SelectContent>
             </Select>
@@ -212,19 +212,20 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               </SelectContent>
             </Select>
           </div>
+          {/* Action Buttons */}
+          <div className="flex items-end h-full gap-2 pt-4">
+            <Button onClick={handleSearch} disabled={loading}>
+              <Search className="h-4 w-4 mr-2" />
+              Tìm kiếm
+            </Button>
+            <Button variant="outline" onClick={handleReset} disabled={loading}>
+              <RotateCcw className="h-4 w-4 mr-2" />
+              Đặt lại
+            </Button>
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-2 pt-4">
-          <Button onClick={handleSearch} disabled={loading}>
-            <Search className="h-4 w-4 mr-2" />
-            Tìm kiếm
-          </Button>
-          <Button variant="outline" onClick={handleReset} disabled={loading}>
-            <RotateCcw className="h-4 w-4 mr-2" />
-            Đặt lại
-          </Button>
-        </div>
+
       </CardContent>
     </Card>
   );

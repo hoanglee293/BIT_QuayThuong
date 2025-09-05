@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { getBalanceInfo } from '@/services/api/TelegramWalletService'
-import { createSwap, getSwapHistory } from '@/services/api/SwapService'
+// import { createSwap, getSwapHistory } from '@/services/api/SwapService'
 import { useLang } from '@/lang/useLang'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
@@ -260,11 +260,13 @@ const SwapModal = ({ isOpen, onClose, selectedToken }: { isOpen: boolean; onClos
     refetchInterval: 5000
   })
 
-  const { data: swapHistoryData, isLoading: historyLoading } = useQuery({
-    queryKey: ['swapHistory'],
-    queryFn: getSwapHistory,
-    enabled: isOpen,
-  })
+  // const { data: swapHistoryData, isLoading: historyLoading } = useQuery({
+  //   queryKey: ['swapHistory'],
+  //   queryFn: () => getSwapHistory(1, 10),
+  //   enabled: isOpen,
+  // })
+  const swapHistoryData = null;
+  const historyLoading = false;
 
   // Update tokens when selectedToken changes
   useEffect(() => {
@@ -280,22 +282,23 @@ const SwapModal = ({ isOpen, onClose, selectedToken }: { isOpen: boolean; onClos
     }
   }, [selectedToken])
 
-  const createSwapMutation = useMutation({
-    mutationFn: createSwap,
-    onSuccess: (data) => {
-      toast.success(t('swap.swapSuccess'))
-      setFromAmount("")
-      setToAmount("")
-    },
-    onError: (error: any) => {
-      console.error("Swap failed:", error)
-      if (error?.response?.data?.message == "Insufficient SOL for transaction fees") {
-        toast.error(t('swap.insufficientSOL'))
-      }else{
-        toast.error(t('swap.swapFailed'))
-      }
-    }
-  })
+  // const createSwapMutation = useMutation({
+  //   mutationFn: createSwap,
+  //   onSuccess: (data) => {
+  //     toast.success(t('swap.swapSuccess'))
+  //     setFromAmount("")
+  //     setToAmount("")
+  //   },
+  //   onError: (error: any) => {
+  //     console.error("Swap failed:", error)
+  //     if (error?.response?.data?.message == "Insufficient SOL for transaction fees") {
+  //       toast.error(t('swap.insufficientSOL'))
+  //     }else{
+  //       toast.error(t('swap.swapFailed'))
+  //     }
+  //   }
+  // })
+  const createSwapMutation = { isPending: false, mutateAsync: async (data: any) => { return data; } };
 
   // Helper function to get current balance for a token
   const getCurrentBalance = (token: string) => {
@@ -482,8 +485,8 @@ const SwapModal = ({ isOpen, onClose, selectedToken }: { isOpen: boolean; onClos
   }, [isMobile])
 
   const swapHistory = useMemo(() => {
-    return swapHistoryData?.data ? formatSwapHistory(swapHistoryData.data) : []
-  }, [swapHistoryData])
+    return []
+  }, [])
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

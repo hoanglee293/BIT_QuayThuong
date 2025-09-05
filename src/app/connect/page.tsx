@@ -55,7 +55,7 @@ const Connect = () => {
                 <img src="/bg-quay-du-thuong.png" alt="logo" className='w-full h-full' />
             </div>
             <div className="flex flex-col justify-center items-center gap-2 xl:gap-4 px-4 lg:px-0 relative z-40 2xl:pt-4 pt-2 w-full">
-                <Card className="w-full max-w-lg py-5 px-8">
+                <Card className="w-full max-w-lg py-5 px-8 bg-white dark:bg-[#141414]">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white p-0">
                             Login
@@ -91,7 +91,7 @@ const Connect = () => {
                             )}
                             <Button
                                 type="submit"
-                                className="w-full bg-theme-primary-500/80 hover:bg-theme-primary-500"
+                                className="w-full bg-theme-primary-500 hover:bg-theme-primary-500"
                                 disabled={isLoading}
                             >
                                 {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}

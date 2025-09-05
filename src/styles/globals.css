@@ -166,7 +166,7 @@ body {
 }
 
 .box-shadow-info {
-  @apply shadow-custom bg-theme-neutral-1000/80;
+  @apply shadow-custom ;
 }
 
 @layer base {
