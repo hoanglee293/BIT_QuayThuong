@@ -14,7 +14,7 @@ interface AuthActions {
   getCurrentUser: () => Promise<void>;
   refreshAuth: () => Promise<void>;
   clearError: () => void;
-  checkAuthFromStorage: () => void;
+  checkAuthFromStorage: () => Promise<void>;
 }
 
 const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
@@ -33,7 +33,9 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       });
       
       // Set isAuth in localStorage
-      localStorage.setItem('isAuth', 'true');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('isAuth', 'true');
+      }
       
       set({ 
         admin: response.admin, 
@@ -61,8 +63,10 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
-      // Remove isAuth from localStorage
-      localStorage.removeItem('isAuth');
+      // Clear all auth data
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('isAuth');
+      }
       
       set({ 
         admin: null, 
@@ -72,9 +76,9 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       });
       
       // Redirect to connect page
-      if (typeof window !== 'undefined') {
-        window.location.href = '/connect';
-      }
+      // if (typeof window !== 'undefined') {
+      //   window.location.href = '/connect';
+      // }
     }
   },
 
@@ -85,7 +89,9 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       const admin = await getCurrentAdmin();
       
       // Set isAuth in localStorage when successfully getting current user
-      localStorage.setItem('isAuth', 'true');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('isAuth', 'true');
+      }
       
       set({ 
         admin, 
@@ -97,7 +103,9 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       const errorMessage = error.response?.data?.message || 'Failed to get current user';
       
       // Remove isAuth from localStorage on error
-      localStorage.removeItem('isAuth');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('isAuth');
+      }
       
       set({ 
         admin: null, 
@@ -113,7 +121,9 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       const response = await refreshToken();
       
       // Set isAuth in localStorage when successfully refreshing token
-      localStorage.setItem('isAuth', 'true');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('isAuth', 'true');
+      }
       
       set({ 
         admin: response.admin, 
@@ -124,7 +134,9 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       const errorMessage = error.response?.data?.message || 'Token refresh failed';
       
       // Remove isAuth from localStorage on error
-      localStorage.removeItem('isAuth');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('isAuth');
+      }
       
       set({ 
         admin: null, 
@@ -139,13 +151,29 @@ const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
     set({ error: null });
   },
 
-  checkAuthFromStorage: () => {
+  checkAuthFromStorage: async () => {
     if (typeof window !== 'undefined') {
       const isAuth = localStorage.getItem('isAuth');
       if (isAuth === 'true') {
-        set({ isAuthenticated: true });
+        // Verify with server instead of just trusting localStorage
+        try {
+          const admin = await getCurrentAdmin();
+          set({ 
+            admin, 
+            isAuthenticated: true,
+            isLoading: false 
+          });
+        } catch (error) {
+          // Token is invalid, clear everything
+          localStorage.removeItem('isAuth');
+          set({ 
+            admin: null, 
+            isAuthenticated: false,
+            isLoading: false 
+          });
+        }
       } else {
-        set({ isAuthenticated: false });
+        set({ isAuthenticated: false, isLoading: false });
       }
     }
   }
