@@ -7,9 +7,11 @@ import LotteryFiltersComponent from '@/app/components/lottery/LotteryFilters';
 import LotteryTable from '@/app/components/lottery/LotteryTable';
 import LotteryPagination from '@/app/components/lottery/LotteryPagination';
 import { Alert, AlertDescription } from '@/ui/alert';
-import { AlertCircle, RefreshCw, Ticket, TrendingUp, Users, Award } from 'lucide-react';
+import { AlertCircle, RefreshCw, Ticket, TrendingUp, Users, Award, Download } from 'lucide-react';
 import { Button } from '@/ui/button';
 import { Card, CardContent } from '@/ui/card';
+import { exportToExcel } from '@/utils/exportToExcel';
+import { axiosClient } from '@/utils/axiosClient';
 
 const Lotterys = () => {
   const { data, pagination, loading, error, fetchLotteries, refetch } = useLottery();
@@ -42,6 +44,66 @@ const Lotterys = () => {
   const availableCodes = totalCodes - usedCodes;
   const usageRate = totalCodes > 0 ? ((usedCodes / totalCodes) * 100).toFixed(1) : '0';
 
+  // Handle Excel export
+  const handleExportExcel = () => {
+    if (!data || data.length === 0) {
+      alert('Không có dữ liệu để xuất!');
+      return;
+    }
+
+    const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+    const filename = `lottery_data_${timestamp}.xlsx`;
+
+    const success = exportToExcel(data, filename);
+    if (success) {
+      alert('Xuất file Excel thành công!');
+    } else {
+      alert('Có lỗi xảy ra khi xuất file Excel!');
+    }
+  };
+
+  const handleExportAllExcel = async () => {
+    try {
+      // Gọi API để lấy tất cả dữ liệu lottery
+      const response = await axiosClient.get('/lotterys?get_all');
+      const allData = response.data.data || [];
+
+      if (allData.length === 0) {
+        alert('Không có dữ liệu để xuất!');
+        return;
+      }
+
+      const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+      const filename = `lottery_all_data_${timestamp}.xlsx`;
+
+      const success = exportToExcel(allData, filename);
+      if (success) {
+        alert(`Xuất thành công ${allData.length} bản ghi ra file Excel!`);
+      } else {
+        alert('Có lỗi xảy ra khi xuất file Excel!');
+      }
+    } catch (error: any) {
+      console.error('Error fetching all lottery data:', error);
+      let errorMessage = 'Có lỗi xảy ra khi tải dữ liệu';
+
+      if (error.response) {
+        if (error.response.status === 401) {
+          errorMessage = 'Unauthorized - Vui lòng đăng nhập lại';
+        } else if (error.response.status === 400) {
+          errorMessage = error.response.data?.message || 'Bad Request';
+        } else {
+          errorMessage = error.response.data?.message || `HTTP error! status: ${error.response.status}`;
+        }
+      } else if (error.request) {
+        errorMessage = 'Không thể kết nối đến server. Vui lòng thử lại sau.';
+      } else {
+        errorMessage = error.message || errorMessage;
+      }
+
+      alert(errorMessage);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-black w-full">
       <div className="container mx-auto px-4 py-8 space-y-8">
@@ -57,49 +119,76 @@ const Lotterys = () => {
                   </h1>
                 </div>
 
-                {/* Statistics Cards */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <Card className="bg-gradient-to-br border-none from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
-                    <CardContent className="p-2 min-w-40">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-blue-500 rounded-lg">
-                          <Ticket className="h-4 w-4 text-white" />
+                <div className="flex gap-3">
+                  {/* Statistics Cards */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <Card className="bg-gradient-to-br border-none from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
+                      <CardContent className="p-2 min-w-40">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-blue-500 rounded-lg">
+                            <Ticket className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Tổng mã</p>
+                            <p className="text-xl font-bold text-blue-900 dark:text-blue-100">{totalCodes.toLocaleString()}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Tổng mã</p>
-                          <p className="text-xl font-bold text-blue-900 dark:text-blue-100">{totalCodes.toLocaleString()}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
 
-                  <Card className="bg-gradient-to-br border-none from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-700">
-                    <CardContent className="p-2 min-w-40">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-green-500 rounded-lg">
-                          <Award className="h-4 w-4 text-white" />
+                    <Card className="bg-gradient-to-br border-none from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-700">
+                      <CardContent className="p-2 min-w-40">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-green-500 rounded-lg">
+                            <Award className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-green-600 dark:text-green-400">Đã sử dụng</p>
+                            <p className="text-xl font-bold text-green-900 dark:text-green-100">{usedCodes.toLocaleString()}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-medium text-green-600 dark:text-green-400">Đã sử dụng</p>
-                          <p className="text-xl font-bold text-green-900 dark:text-green-100">{usedCodes.toLocaleString()}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
 
-                  <Card className="dark:bg-gray-700 bg-white border-none">
-                    <CardContent className="p-2 min-w-40">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-gray-800 rounded-lg">
-                          <TrendingUp className="h-4 w-4 text-white" />
+                    <Card className="dark:bg-gray-700 bg-white border-none">
+                      <CardContent className="p-2 min-w-40">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-gray-800 rounded-lg">
+                            <TrendingUp className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-orange-600 dark:text-orange-400">Còn lại</p>
+                            <p className="text-xl font-bold text-orange-900 dark:text-orange-100">{availableCodes.toLocaleString()}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-medium text-orange-600 dark:text-orange-400">Còn lại</p>
-                          <p className="text-xl font-bold text-orange-900 dark:text-orange-100">{availableCodes.toLocaleString()}</p>
+                      </CardContent>
+                    </Card>
+                    <Card className="dark:bg-gray-700 bg-white border-none">
+                      <CardContent className="p-2 min-w-40">
+                        <div className="flex flex-col gap-2">
+                          <Button
+                            onClick={handleExportExcel}
+                            disabled={loading || !data || data.length === 0}
+                            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs p-2 h-8"
+                            size="sm"
+                          >
+                            <Download className="h-3 w-3" />
+                            Xuất Excel dữ liệu theo bộ lọc
+                          </Button>
+                          <Button
+                            onClick={handleExportAllExcel}
+                            disabled={loading}
+                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs p-2 h-8"
+                            size="sm"
+                          >
+                            <Download className="h-3 w-3" />
+                            Xuất Excel tất cả dữ liệu
+                          </Button>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+
+                  </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button
                       variant="outline"
@@ -112,7 +201,6 @@ const Lotterys = () => {
                     </Button>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

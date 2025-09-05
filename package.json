@@ -42,6 +42,7 @@
     "@radix-ui/react-tooltip": "^1.1.8",
     "@solana/web3.js": "^1.98.0",
     "@tanstack/react-query": "^5.71.1",
+    "@types/xlsx": "^0.0.35",
     "axios": "^1.8.4",
     "bs58": "^6.0.0",
     "class-variance-authority": "^0.7.1",
@@ -82,6 +83,7 @@
     "tailwindcss-animate": "^1.0.7",
     "translate": "^1.4.1",
     "vaul": "^1.1.2",
+    "xlsx": "^0.18.5",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
