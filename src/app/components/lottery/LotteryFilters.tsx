@@ -53,9 +53,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   };
 
   return (
-    <Card className="mb-6 p-8">
+    <Card className="mb-6 p-8 bg-card border-none shadow-inset dark:shadow-none dark:border-solid">
       <CardHeader className="p-0 pb-5">
-        <CardTitle className="flex items-center gap-2 m-0 p-0">
+        <CardTitle className="flex items-center gap-2 m-0 p-0 text-card-foreground">
           <Filter className="h-5 w-5" />
           Bộ lọc mã dự thưởng
         </CardTitle>
@@ -64,36 +64,37 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
         {/* Basic Search */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Tìm kiếm tổng quát</label>
+            <label className="text-sm font-medium text-foreground">Tìm kiếm tổng quát</label>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Tìm theo mã, số UID, telegram ID..."
                 value={filters.search || ''}
                 onChange={(e) => handleInputChange('search', e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="pl-10"
+                className="pl-10 bg-background border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Mã dự thưởng</label>
+            <label className="text-sm font-medium text-foreground">Mã dự thưởng</label>
             <Input
               placeholder="Nhập mã dự thưởng..."
               value={filters.code || ''}
               onChange={(e) => handleInputChange('code', e.target.value)}
               onKeyPress={handleKeyPress}
+              className="bg-background border-input text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Trạng thái</label>
+            <label className="text-sm font-medium text-foreground">Trạng thái</label>
             <Select
               value={filters.is_used || 'all'}
               onValueChange={(value) => handleInputChange('is_used', value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue placeholder="Chọn trạng thái" />
               </SelectTrigger>
               <SelectContent>
@@ -118,56 +119,60 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
 
         {/* Advanced Filters */}
         {showAdvanced && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-border">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Telegram ID</label>
+              <label className="text-sm font-medium text-foreground">Telegram ID</label>
               <Input
                 placeholder="Nhập Telegram ID..."
                 value={filters.telegram_id || ''}
                 onChange={(e) => handleInputChange('telegram_id', e.target.value)}
                 onKeyPress={handleKeyPress}
+                className="bg-background border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">UID</label>
+              <label className="text-sm font-medium text-foreground">UID</label>
               <Input
                 placeholder="Nhập UID..."
                 value={filters.input_number || ''}
                 onChange={(e) => handleInputChange('input_number', e.target.value)}
                 onKeyPress={handleKeyPress}
+                className="bg-background border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Từ ngày</label>
+              <label className="text-sm font-medium text-foreground">Từ ngày</label>
               <Input
                 type="date"
                 value={filters.start_date || ''}
                 onChange={(e) => handleInputChange('start_date', e.target.value)}
+                className="bg-background border-input text-foreground"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Đến ngày</label>
+              <label className="text-sm font-medium text-foreground">Đến ngày</label>
               <Input
                 type="date"
                 value={filters.end_date || ''}
                 onChange={(e) => handleInputChange('end_date', e.target.value)}
+                className="bg-background border-input text-foreground"
               />
             </div>
           </div>
         )}
 
         {/* Sort Options */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-border">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Sắp xếp theo</label>
+            <label className="text-sm font-medium text-foreground">Sắp xếp theo</label>
             <Select
               value={filters.sort_by || 'created_at'}
               onValueChange={(value) => handleInputChange('sort_by', value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -180,12 +185,12 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Thứ tự</label>
+            <label className="text-sm font-medium text-foreground">Thứ tự</label>
             <Select
               value={filters.sort_order || 'DESC'}
               onValueChange={(value) => handleInputChange('sort_order', value as 'ASC' | 'DESC')}
             >
-              <SelectTrigger>
+              <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -196,12 +201,12 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Số lượng/trang</label>
+            <label className="text-sm font-medium text-foreground">Số lượng/trang</label>
             <Select
               value={filters.limit?.toString() || '10'}
               onValueChange={(value) => handleInputChange('limit', value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -214,11 +219,20 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
           </div>
           {/* Action Buttons */}
           <div className="flex items-end h-full gap-2 pt-4">
-            <Button onClick={handleSearch} disabled={loading}>
+            <Button 
+              onClick={handleSearch} 
+              disabled={loading}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
               <Search className="h-4 w-4 mr-2" />
               Tìm kiếm
             </Button>
-            <Button variant="outline" onClick={handleReset} disabled={loading}>
+            <Button 
+              variant="outline" 
+              onClick={handleReset} 
+              disabled={loading}
+              className="border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
+            >
               <RotateCcw className="h-4 w-4 mr-2" />
               Đặt lại
             </Button>

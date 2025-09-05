@@ -48,7 +48,7 @@ const Lotterys = () => {
         {/* Header Section */}
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-indigo-600/10 rounded-3xl blur-3xl"></div>
-          <div className="relative bg-slate-500 dark:bg-gray-800 backdrop-blur-sm rounded-2xl border border-white/20 dark:border-slate-700/50 px-8 py-4 shadow-xl">
+          <div className="relative shadow-inset dark:shadow-none dark:border-solid bg-transparent dark:bg-gray-800 backdrop-blur-sm rounded-2xl border border-white/20 dark:border-slate-700/50 px-8 py-4 shadow-xl">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div className="flex items-start justify-between w-full">
                 <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ const Lotterys = () => {
 
                 {/* Statistics Cards */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
+                  <Card className="bg-gradient-to-br border-none from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
                     <CardContent className="p-2 min-w-40">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-blue-500 rounded-lg">
@@ -73,7 +73,7 @@ const Lotterys = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-700">
+                  <Card className="bg-gradient-to-br border-none from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-700">
                     <CardContent className="p-2 min-w-40">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-green-500 rounded-lg">
@@ -87,10 +87,10 @@ const Lotterys = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 border-orange-200 dark:border-orange-700">
+                  <Card className="dark:bg-gray-700 bg-white border-none">
                     <CardContent className="p-2 min-w-40">
                       <div className="flex items-center gap-3">
-                        <div className="p-2 bg-orange-500 rounded-lg">
+                        <div className="p-2 bg-gray-800 rounded-lg">
                           <TrendingUp className="h-4 w-4 text-white" />
                         </div>
                         <div>
@@ -105,7 +105,7 @@ const Lotterys = () => {
                       variant="outline"
                       onClick={refetch}
                       disabled={loading}
-                      className="flex items-center gap-2 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm border-white/20 dark:border-slate-600/50 hover:bg-white/80 dark:hover:bg-slate-700/80 transition-all duration-300 shadow-lg text-xs p-2"
+                      className="flex items-center gap-2 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm border-white/20 dark:border-slate-600/50 hover:bg-white/80 dark:hover:bg-slate-700/80 transition-all duration-300 shadow-lg text-xs p-2 max-h-8"
                     >
                       <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
                       Làm mới
@@ -152,7 +152,7 @@ const Lotterys = () => {
         {pagination && (
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-indigo-600/5 to-purple-600/5 rounded-2xl blur-2xl"></div>
-            <div className="relative bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl border border-white/20 dark:border-slate-700/50 px-8 shadow-lg">
+            <div className="relative bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl border border-white/20 dark:border-gray-700/50 px-8 shadow-lg shadow-inset dark:shadow-none dark:border-solid">
               <LotteryPagination
                 pagination={pagination}
                 onPageChange={handlePageChange}

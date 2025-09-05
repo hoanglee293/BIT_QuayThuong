@@ -68,34 +68,34 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
   }
 
   return (
-    <Card className="p-8">
+    <Card className="p-8 shadow-inset dark:shadow-none border-none dark:border-solid">
       <CardHeader className="p-0 pb-5">
         <CardTitle>Danh sách mã dự thưởng ({data.length} kết quả)</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="overflow-x-auto">
-          <Table>
+        <div className="overflow-x-auto p-2 bg-white dark:bg-black rounded-xl border border-white/20 dark:border-slate-700/50">
+          <Table className="table-fixed w-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">ID</TableHead>
-                <TableHead className="w-[150px]">Mã dự thưởng</TableHead>
-                <TableHead className="w-[120px]">UID</TableHead>
-                <TableHead className="w-[150px]">Tên người dùng</TableHead>
-                <TableHead className="w-[150px]">Telegram ID</TableHead>
-                <TableHead className="w-[100px]">Trạng thái</TableHead>
-                <TableHead className="w-[150px]">Ngày tạo</TableHead>
-                <TableHead className="w-[100px]">Thao tác</TableHead>
+                <TableHead className="w-[8%] text-center">ID</TableHead>
+                <TableHead className="w-[18%] text-center">Mã dự thưởng</TableHead>
+                <TableHead className="w-[10%] text-center">UID</TableHead>
+                <TableHead className="w-[15%] text-center">Tên người dùng</TableHead>
+                <TableHead className="w-[15%] text-center">Telegram ID</TableHead>
+                <TableHead className="w-[12%] text-center">Trạng thái</TableHead>
+                <TableHead className="w-[15%] text-center">Ngày tạo</TableHead>
+                <TableHead className="w-[7%] text-center">Thao tác</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {data.map((lottery) => (
                 <TableRow key={lottery.id}>
-                  <TableCell className="font-medium">
+                  <TableCell className="font-medium text-center">
                     {lottery.id}
                   </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <code className=" px-2 py-1 rounded text-sm font-mono">
+                  <TableCell className="text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <code className="px-2 py-1 rounded text-sm font-mono bg-gray-100 dark:bg-gray-800">
                         {lottery.code}
                       </code>
                       <Button
@@ -112,46 +112,48 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                       </Button>
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <span className="font-mono">
+                  <TableCell className="text-center">
+                    <span className="font-mono text-sm">
                       {lottery.input_number}
                     </span>
                   </TableCell>
-                  <TableCell>
-                    <div className="max-w-[120px] truncate" title={lottery.user?.name}>
+                  <TableCell className="text-center">
+                    <div className="truncate" title={lottery.user?.name}>
                       {lottery.user?.name || 'N/A'}
                     </div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <span className="font-mono text-sm">
                       {lottery.user?.telegram_id || 'N/A'}
                     </span>
                   </TableCell>
-                  <TableCell>
-                    <Badge 
-                      variant={lottery.is_used ? "destructive" : "default"}
-                      className="flex items-center gap-1 w-fit"
-                    >
-                      {lottery.is_used ? (
-                        <>
-                          <XCircle className="h-3 w-3" />
-                          Đã sử dụng
-                        </>
-                      ) : (
-                        <>
-                          <CheckCircle className="h-3 w-3" />
-                          Chưa sử dụng
-                        </>
-                      )}
-                    </Badge>
+                  <TableCell className="text-center">
+                    <div className="flex justify-center">
+                      <Badge 
+                        variant={lottery.is_used ? "destructive" : "default"}
+                        className="flex items-center gap-1 w-fit"
+                      >
+                        {lottery.is_used ? (
+                          <>
+                            <XCircle className="h-3 w-3" />
+                            Đã sử dụng
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle className="h-3 w-3" />
+                            Chưa sử dụng
+                          </>
+                        )}
+                      </Badge>
+                    </div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <span className="text-sm text-gray-600">
                       {formatDate(lottery.created_at)}
                     </span>
                   </TableCell>
-                  <TableCell>
-                    <div className="flex gap-1">
+                  <TableCell className="text-center">
+                    <div className="flex justify-center">
                       <Button
                         variant="outline"
                         size="sm"

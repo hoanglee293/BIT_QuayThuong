@@ -299,6 +299,10 @@ input[type=number] {
   scrollbar-color: #475569 #1e293b;
 }
 
+.shadow-inset {
+  box-shadow: inset -1px -1px 4px #b8adada8;
+}
+
 @media (min-width: 1120px) and (max-width: 1320px) {
   html {
     font-size: 10px !important;
