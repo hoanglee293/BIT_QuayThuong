@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import { Copy, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '@/ui/button';
+import { useLang } from '@/lang/useLang';
 
 interface LotteryTableProps {
   data: LotteryCode[];
@@ -16,6 +17,7 @@ interface LotteryTableProps {
 }
 
 const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) => {
+  const { t } = useLang();
   const [copiedCode, setCopiedCode] = React.useState<string | null>(null);
 
   const handleCopyCode = async (code: string) => {
@@ -40,12 +42,12 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Danh sách mã dự thưởng</CardTitle>
+          <CardTitle>{t('lottery.table.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            <span className="ml-2">Đang tải...</span>
+            <span className="ml-2">{t('lottery.table.loading')}</span>
           </div>
         </CardContent>
       </Card>
@@ -56,11 +58,11 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Danh sách mã dự thưởng</CardTitle>
+          <CardTitle>{t('lottery.table.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8 text-gray-500">
-            Không tìm thấy mã dự thưởng nào
+            {t('lottery.table.noData')}
           </div>
         </CardContent>
       </Card>
@@ -70,21 +72,21 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
   return (
     <Card className="p-8 shadow-inset dark:shadow-none border-none dark:border-solid">
       <CardHeader className="p-0 pb-5">
-        <CardTitle>Danh sách mã dự thưởng ({data.length} kết quả)</CardTitle>
+        <CardTitle>{t('lottery.table.title')} ({t('lottery.table.results', { count: data.length })})</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto p-2 bg-white dark:bg-black rounded-xl border border-white/20 dark:border-slate-700/50">
           <Table className="table-fixed w-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[8%] text-center">ID</TableHead>
-                <TableHead className="w-[18%] text-center">Mã dự thưởng</TableHead>
-                <TableHead className="w-[10%] text-center">UID</TableHead>
-                <TableHead className="w-[15%] text-center">Tên người dùng</TableHead>
-                <TableHead className="w-[15%] text-center">Telegram ID</TableHead>
-                <TableHead className="w-[12%] text-center">Trạng thái</TableHead>
-                <TableHead className="w-[15%] text-center">Ngày tạo</TableHead>
-                <TableHead className="w-[7%] text-center">Thao tác</TableHead>
+                <TableHead className="w-[8%] text-center">{t('lottery.table.id')}</TableHead>
+                <TableHead className="w-[18%] text-center">{t('lottery.table.lotteryCode')}</TableHead>
+                <TableHead className="w-[10%] text-center">{t('lottery.table.uid')}</TableHead>
+                <TableHead className="w-[15%] text-center">{t('lottery.table.userName')}</TableHead>
+                <TableHead className="w-[15%] text-center">{t('lottery.table.telegramId')}</TableHead>
+                <TableHead className="w-[12%] text-center">{t('lottery.table.status')}</TableHead>
+                <TableHead className="w-[15%] text-center">{t('lottery.table.createdAt')}</TableHead>
+                <TableHead className="w-[7%] text-center">{t('lottery.table.actions')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -119,12 +121,12 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                   </TableCell>
                   <TableCell className="text-center">
                     <div className="truncate" title={lottery.user?.name}>
-                      {lottery.user?.name || 'N/A'}
+                      {lottery.user?.name || t('lottery.table.na')}
                     </div>
                   </TableCell>
                   <TableCell className="text-center">
                     <span className="font-mono text-sm">
-                      {lottery.user?.telegram_id || 'N/A'}
+                      {lottery.user?.telegram_id || t('lottery.table.na')}
                     </span>
                   </TableCell>
                   <TableCell className="text-center">
@@ -136,12 +138,12 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                         {lottery.is_used ? (
                           <>
                             <XCircle className="h-3 w-3" />
-                            Đã sử dụng
+                            {t('lottery.table.used')}
                           </>
                         ) : (
                           <>
                             <CheckCircle className="h-3 w-3" />
-                            Chưa sử dụng
+                            {t('lottery.table.unused')}
                           </>
                         )}
                       </Badge>
@@ -160,7 +162,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                         onClick={() => handleCopyCode(lottery.code)}
                         className="text-xs"
                       >
-                        Copy
+                        {t('lottery.table.copy')}
                       </Button>
                     </div>
                   </TableCell>

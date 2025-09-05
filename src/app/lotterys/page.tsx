@@ -12,9 +12,11 @@ import { Button } from '@/ui/button';
 import { Card, CardContent } from '@/ui/card';
 import { exportToExcel } from '@/utils/exportToExcel';
 import { axiosClient } from '@/utils/axiosClient';
+import { useLang } from '@/lang/useLang';
 
 const Lotterys = () => {
   const { data, pagination, loading, error, fetchLotteries, refetch } = useLottery();
+  const { t } = useLang();
 
   const handleFiltersChange = (filters: LotteryFilters) => {
     fetchLotteries(filters);
@@ -47,7 +49,7 @@ const Lotterys = () => {
   // Handle Excel export
   const handleExportExcel = () => {
     if (!data || data.length === 0) {
-      alert('Không có dữ liệu để xuất!');
+      alert(t('lottery.noDataToExport'));
       return;
     }
 
@@ -56,9 +58,9 @@ const Lotterys = () => {
 
     const success = exportToExcel(data, filename);
     if (success) {
-      alert('Xuất file Excel thành công!');
+      alert(t('lottery.exportSuccess'));
     } else {
-      alert('Có lỗi xảy ra khi xuất file Excel!');
+      alert(t('lottery.exportError'));
     }
   };
 
@@ -69,7 +71,7 @@ const Lotterys = () => {
       const allData = response.data.data || [];
 
       if (allData.length === 0) {
-        alert('Không có dữ liệu để xuất!');
+        alert(t('lottery.noDataToExport'));
         return;
       }
 
@@ -78,24 +80,24 @@ const Lotterys = () => {
 
       const success = exportToExcel(allData, filename);
       if (success) {
-        alert(`Xuất thành công ${allData.length} bản ghi ra file Excel!`);
+        alert(t('lottery.exportAllSuccess', { count: allData.length }));
       } else {
-        alert('Có lỗi xảy ra khi xuất file Excel!');
+        alert(t('lottery.exportError'));
       }
     } catch (error: any) {
       console.error('Error fetching all lottery data:', error);
-      let errorMessage = 'Có lỗi xảy ra khi tải dữ liệu';
+      let errorMessage = t('lottery.dataLoadError');
 
       if (error.response) {
         if (error.response.status === 401) {
-          errorMessage = 'Unauthorized - Vui lòng đăng nhập lại';
+          errorMessage = t('lottery.unauthorized');
         } else if (error.response.status === 400) {
-          errorMessage = error.response.data?.message || 'Bad Request';
+          errorMessage = error.response.data?.message || t('lottery.badRequest');
         } else {
           errorMessage = error.response.data?.message || `HTTP error! status: ${error.response.status}`;
         }
       } else if (error.request) {
-        errorMessage = 'Không thể kết nối đến server. Vui lòng thử lại sau.';
+        errorMessage = t('lottery.connectionError');
       } else {
         errorMessage = error.message || errorMessage;
       }
@@ -115,7 +117,7 @@ const Lotterys = () => {
               <div className="flex items-start justify-between w-full">
                 <div className="flex items-center gap-3">
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900 dark:from-white dark:via-blue-100 dark:to-purple-100 bg-clip-text text-transparent">
-                    Tổng quan
+                    {t('lottery.overview')}
                   </h1>
                 </div>
 
@@ -129,7 +131,7 @@ const Lotterys = () => {
                             <Ticket className="h-4 w-4 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Tổng mã</p>
+                            <p className="text-sm font-medium text-blue-600 dark:text-blue-400">{t('lottery.totalCodes')}</p>
                             <p className="text-xl font-bold text-blue-900 dark:text-blue-100">{totalCodes.toLocaleString()}</p>
                           </div>
                         </div>
@@ -143,7 +145,7 @@ const Lotterys = () => {
                             <Award className="h-4 w-4 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-green-600 dark:text-green-400">Đã sử dụng</p>
+                            <p className="text-sm font-medium text-green-600 dark:text-green-400">{t('lottery.usedCodes')}</p>
                             <p className="text-xl font-bold text-green-900 dark:text-green-100">{usedCodes.toLocaleString()}</p>
                           </div>
                         </div>
@@ -157,7 +159,7 @@ const Lotterys = () => {
                             <TrendingUp className="h-4 w-4 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-orange-600 dark:text-orange-400">Còn lại</p>
+                            <p className="text-sm font-medium text-orange-600 dark:text-orange-400">{t('lottery.remainingCodes')}</p>
                             <p className="text-xl font-bold text-orange-900 dark:text-orange-100">{availableCodes.toLocaleString()}</p>
                           </div>
                         </div>
@@ -173,7 +175,7 @@ const Lotterys = () => {
                             size="sm"
                           >
                             <Download className="h-3 w-3" />
-                            Xuất Excel dữ liệu theo bộ lọc
+                            {t('lottery.exportFilteredData')}
                           </Button>
                           <Button
                             onClick={handleExportAllExcel}
@@ -182,7 +184,7 @@ const Lotterys = () => {
                             size="sm"
                           >
                             <Download className="h-3 w-3" />
-                            Xuất Excel tất cả dữ liệu
+                            {t('lottery.exportAllData')}
                           </Button>
                         </div>
                       </CardContent>
@@ -197,7 +199,7 @@ const Lotterys = () => {
                       className="flex items-center gap-2 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm border-white/20 dark:border-slate-600/50 hover:bg-white/80 dark:hover:bg-slate-700/80 transition-all duration-300 shadow-lg text-xs p-2 max-h-8"
                     >
                       <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
-                      Làm mới
+                      {t('lottery.refresh')}
                     </Button>
                   </div>
                 </div>

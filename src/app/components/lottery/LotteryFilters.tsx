@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { Search, Filter, RotateCcw } from 'lucide-react';
 import { LotteryFilters } from '@/types/lottery';
+import { useLang } from '@/lang/useLang';
 
 interface LotteryFiltersProps {
   onFiltersChange: (filters: LotteryFilters) => void;
@@ -17,6 +18,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   onFiltersChange,
   loading = false
 }) => {
+  const { t } = useLang();
   const [filters, setFilters] = useState<LotteryFilters>({
     page: 1,
     limit: 10,
@@ -57,18 +59,18 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
       <CardHeader className="p-0 pb-5">
         <CardTitle className="flex items-center gap-2 m-0 p-0 text-card-foreground">
           <Filter className="h-5 w-5" />
-          Bộ lọc mã dự thưởng
+          {t('lottery.filters.title')}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Basic Search */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Tìm kiếm tổng quát</label>
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.generalSearch')}</label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Tìm theo mã, số UID, telegram ID..."
+                placeholder={t('lottery.filters.generalSearchPlaceholder')}
                 value={filters.search || ''}
                 onChange={(e) => handleInputChange('search', e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -78,9 +80,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Mã dự thưởng</label>
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.lotteryCode')}</label>
             <Input
-              placeholder="Nhập mã dự thưởng..."
+              placeholder={t('lottery.filters.lotteryCodePlaceholder')}
               value={filters.code || ''}
               onChange={(e) => handleInputChange('code', e.target.value)}
               onKeyPress={handleKeyPress}
@@ -89,18 +91,18 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Trạng thái</label>
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.status')}</label>
             <Select
               value={filters.is_used || 'all'}
               onValueChange={(value) => handleInputChange('is_used', value)}
             >
               <SelectTrigger className="bg-background border-input text-foreground">
-                <SelectValue placeholder="Chọn trạng thái" />
+                <SelectValue placeholder={t('lottery.filters.statusPlaceholder')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Tất cả</SelectItem>
-                <SelectItem value="false">Chưa sử dụng</SelectItem>
-                <SelectItem value="true">Đã sử dụng</SelectItem>
+                <SelectItem value="all">{t('lottery.filters.all')}</SelectItem>
+                <SelectItem value="false">{t('lottery.filters.unused')}</SelectItem>
+                <SelectItem value="true">{t('lottery.filters.used')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -112,7 +114,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               size="sm"
               onClick={() => setShowAdvanced(!showAdvanced)}
             >
-              {showAdvanced ? 'Ẩn bộ lọc nâng cao' : 'Hiện bộ lọc nâng cao'}
+              {showAdvanced ? t('lottery.filters.hideAdvanced') : t('lottery.filters.showAdvanced')}
             </Button>
           </div>
         </div>
@@ -121,9 +123,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
         {showAdvanced && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-border">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Telegram ID</label>
+              <label className="text-sm font-medium text-foreground">{t('lottery.filters.telegramId')}</label>
               <Input
-                placeholder="Nhập Telegram ID..."
+                placeholder={t('lottery.filters.telegramIdPlaceholder')}
                 value={filters.telegram_id || ''}
                 onChange={(e) => handleInputChange('telegram_id', e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -132,9 +134,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">UID</label>
+              <label className="text-sm font-medium text-foreground">{t('lottery.filters.uid')}</label>
               <Input
-                placeholder="Nhập UID..."
+                placeholder={t('lottery.filters.uidPlaceholder')}
                 value={filters.input_number || ''}
                 onChange={(e) => handleInputChange('input_number', e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -143,7 +145,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Từ ngày</label>
+              <label className="text-sm font-medium text-foreground">{t('lottery.filters.fromDate')}</label>
               <Input
                 type="date"
                 value={filters.start_date || ''}
@@ -153,7 +155,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Đến ngày</label>
+              <label className="text-sm font-medium text-foreground">{t('lottery.filters.toDate')}</label>
               <Input
                 type="date"
                 value={filters.end_date || ''}
@@ -167,7 +169,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
         {/* Sort Options */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-border">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Sắp xếp theo</label>
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.sortBy')}</label>
             <Select
               value={filters.sort_by || 'created_at'}
               onValueChange={(value) => handleInputChange('sort_by', value)}
@@ -176,16 +178,16 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="created_at">Ngày tạo</SelectItem>
-                <SelectItem value="code">Mã dự thưởng</SelectItem>
-                <SelectItem value="input_number">UID</SelectItem>
-                <SelectItem value="is_used">Trạng thái</SelectItem>
+                <SelectItem value="created_at">{t('lottery.filters.createdAt')}</SelectItem>
+                <SelectItem value="code">{t('lottery.filters.code')}</SelectItem>
+                <SelectItem value="input_number">{t('lottery.filters.inputNumber')}</SelectItem>
+                <SelectItem value="is_used">{t('lottery.filters.isUsed')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Thứ tự</label>
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.order')}</label>
             <Select
               value={filters.sort_order || 'DESC'}
               onValueChange={(value) => handleInputChange('sort_order', value as 'ASC' | 'DESC')}
@@ -194,14 +196,14 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="DESC">Giảm dần</SelectItem>
-                <SelectItem value="ASC">Tăng dần</SelectItem>
+                <SelectItem value="DESC">{t('lottery.filters.descending')}</SelectItem>
+                <SelectItem value="ASC">{t('lottery.filters.ascending')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Số lượng/trang</label>
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.itemsPerPage')}</label>
             <Select
               value={filters.limit?.toString() || '10'}
               onValueChange={(value) => handleInputChange('limit', value)}
@@ -225,7 +227,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Search className="h-4 w-4 mr-2" />
-              Tìm kiếm
+              {t('lottery.filters.search')}
             </Button>
             <Button 
               variant="outline" 
@@ -234,7 +236,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               className="border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
             >
               <RotateCcw className="h-4 w-4 mr-2" />
-              Đặt lại
+              {t('lottery.filters.reset')}
             </Button>
           </div>
         </div>
