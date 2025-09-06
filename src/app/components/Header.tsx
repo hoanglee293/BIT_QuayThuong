@@ -135,7 +135,7 @@ const Header = () => {
                                                 <ChevronDown size={14} className="ml-1" />
                                             </button>
                                         </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800">
+                                        <DropdownMenuContent align="end" className="w-56 mt-2.5 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800">
                                             <DropdownMenuItem
                                                 className="dropdown-item cursor-pointer text-gray-700 dark:text-neutral-200"
                                             >

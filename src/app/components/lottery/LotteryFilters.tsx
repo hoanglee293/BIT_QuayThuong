@@ -307,7 +307,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
             <Button
               onClick={handleSearch}
               disabled={loading}
-              className="bg-theme-primary-500 text-primary-foreground hover:bg-primary/90"
+              className="bg-theme-primary-500 text-primary-foreground text-white hover:bg-primary/90"
             >
               <Search className="h-4 w-4 mr-2" />
               {t('lottery.filters.search')}

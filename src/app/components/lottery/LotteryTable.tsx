@@ -129,7 +129,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, tota
                   </TableCell>
 
                   <TableCell className="text-center">
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-yellow-400">
                       {formatDate(lottery.created_at)}
                     </span>
                   </TableCell>
