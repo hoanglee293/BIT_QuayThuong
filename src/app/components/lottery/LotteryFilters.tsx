@@ -223,7 +223,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-input text-foreground">
                 <SelectItem value="created_at">{t('lottery.filters.createdAt')}</SelectItem>
                 <SelectItem value="code">{t('lottery.filters.code')}</SelectItem>
                 <SelectItem value="input_number">{t('lottery.filters.inputNumber')}</SelectItem>
@@ -241,7 +241,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-input text-foreground">
                 <SelectItem value="DESC">{t('lottery.filters.descending')}</SelectItem>
                 <SelectItem value="ASC">{t('lottery.filters.ascending')}</SelectItem>
               </SelectContent>
@@ -262,7 +262,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               <SelectTrigger className="bg-background border-input text-foreground">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-input text-foreground">
                 <SelectItem value="5">5</SelectItem>
                 <SelectItem value="10">10</SelectItem>
                 <SelectItem value="20">20</SelectItem>
