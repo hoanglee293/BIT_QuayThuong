@@ -106,22 +106,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               </SelectContent>
             </Select>
           </div>
-          {/* Advanced Filters Toggle */}
-          <div className="flex items-end h-full">
-            <Button
-              variant="outline"
-              className="w-full h-10 bg-theme-primary-500 border-none hover:bg-theme-primary-500/80 text-white"
-              size="sm"
-              onClick={() => setShowAdvanced(!showAdvanced)}
-            >
-              {showAdvanced ? t('lottery.filters.hideAdvanced') : t('lottery.filters.showAdvanced')}
-            </Button>
-          </div>
         </div>
 
-        {/* Advanced Filters */}
-        {showAdvanced && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-border">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium text-foreground">{t('lottery.filters.telegramId')}</label>
               <Input
@@ -164,10 +151,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               />
             </div>
           </div>
-        )}
 
         {/* Sort Options */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-border">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">{t('lottery.filters.sortBy')}</label>
             <Select
@@ -216,6 +202,9 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
                 <SelectItem value="20">20</SelectItem>
                 <SelectItem value="50">50</SelectItem>
                 <SelectItem value="100">100</SelectItem>
+                <SelectItem value="200">200</SelectItem>
+                <SelectItem value="500">500</SelectItem>
+                <SelectItem value="1000">1000</SelectItem>
               </SelectContent>
             </Select>
           </div>

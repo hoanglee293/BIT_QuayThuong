@@ -67,7 +67,7 @@ const Lotterys = () => {
   const handleExportAllExcel = async () => {
     try {
       // Gọi API để lấy tất cả dữ liệu lottery
-      const response = await axiosClient.get('/lotterys?get_all');
+      const response = await axiosClient.get('/lotterys?get_all=true');
       const allData = response.data.data || [];
 
       if (allData.length === 0) {
