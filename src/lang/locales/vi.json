@@ -80,6 +80,34 @@
       "showing": "Hiển thị",
       "of": "trong",
       "results": "kết quả"
+    },
+    "excel": {
+      "headers": {
+        "stt": "STT",
+        "id": "ID",
+        "code": "Mã Code",
+        "userId": "User ID",
+        "userName": "Tên User",
+        "telegramId": "Telegram ID",
+        "inputNumber": "Số nhập",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "used": "Đã sử dụng",
+        "unused": "Chưa sử dụng"
+      },
+      "sheets": {
+        "lotteryData": "Dữ liệu Lottery",
+        "statistics": "Thống kê",
+        "detailedData": "Dữ liệu chi tiết"
+      },
+      "stats": {
+        "title": "THỐNG KÊ TỔNG QUAN LOTTERY",
+        "totalCodes": "Tổng số mã:",
+        "usedCodes": "Đã sử dụng:",
+        "remainingCodes": "Còn lại:",
+        "usageRate": "Tỷ lệ sử dụng:",
+        "exportDate": "Ngày xuất báo cáo:"
+      }
     }
   },
   "languages": {

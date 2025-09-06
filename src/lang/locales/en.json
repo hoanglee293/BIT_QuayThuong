@@ -80,6 +80,34 @@
       "showing": "Showing",
       "of": "of",
       "results": "results"
+    },
+    "excel": {
+      "headers": {
+        "stt": "No.",
+        "id": "ID",
+        "code": "Code",
+        "userId": "User ID",
+        "userName": "User Name",
+        "telegramId": "Telegram ID",
+        "inputNumber": "Input Number",
+        "status": "Status",
+        "createdAt": "Created Date",
+        "used": "Used",
+        "unused": "Unused"
+      },
+      "sheets": {
+        "lotteryData": "Lottery Data",
+        "statistics": "Statistics",
+        "detailedData": "Detailed Data"
+      },
+      "stats": {
+        "title": "LOTTERY OVERVIEW STATISTICS",
+        "totalCodes": "Total Codes:",
+        "usedCodes": "Used:",
+        "remainingCodes": "Remaining:",
+        "usageRate": "Usage Rate:",
+        "exportDate": "Export Date:"
+      }
     }
   },
   "languages": {

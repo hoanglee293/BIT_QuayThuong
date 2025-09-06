@@ -22,7 +22,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   loading = false,
   data
 }) => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [filters, setFilters] = useState<LotteryFilters>({
     page: 1,
     limit: 10,
@@ -31,6 +31,47 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   });
 
   const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // Helper function để tạo translations object
+  const createTranslations = () => ({
+    headers: {
+      stt: t('lottery.excel.headers.stt'),
+      id: t('lottery.excel.headers.id'),
+      code: t('lottery.excel.headers.code'),
+      userId: t('lottery.excel.headers.userId'),
+      userName: t('lottery.excel.headers.userName'),
+      telegramId: t('lottery.excel.headers.telegramId'),
+      inputNumber: t('lottery.excel.headers.inputNumber'),
+      status: t('lottery.excel.headers.status'),
+      createdAt: t('lottery.excel.headers.createdAt'),
+      used: t('lottery.excel.headers.used'),
+      unused: t('lottery.excel.headers.unused')
+    },
+    sheets: {
+      lotteryData: t('lottery.excel.sheets.lotteryData'),
+      statistics: t('lottery.excel.sheets.statistics'),
+      detailedData: t('lottery.excel.sheets.detailedData')
+    },
+    stats: {
+      title: t('lottery.excel.stats.title'),
+      totalCodes: t('lottery.excel.stats.totalCodes'),
+      usedCodes: t('lottery.excel.stats.usedCodes'),
+      remainingCodes: t('lottery.excel.stats.remainingCodes'),
+      usageRate: t('lottery.excel.stats.usageRate'),
+      exportDate: t('lottery.excel.stats.exportDate')
+    }
+  });
+
+  // Helper function để lấy locale
+  const getLocale = () => {
+    const localeMap: { [key: string]: string } = {
+      'vi': 'vi-VN',
+      'en': 'en-US',
+      'kr': 'ko-KR',
+      'jp': 'ja-JP'
+    };
+    return localeMap[lang] || 'vi-VN';
+  };
 
   const handleInputChange = (field: keyof LotteryFilters, value: string) => {
     const newFilters = { ...filters, [field]: value === 'all' ? undefined : (value || undefined) };
@@ -68,7 +109,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
     const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
     const filename = `lottery_data_${timestamp}.xlsx`;
 
-    const success = exportToExcel(data, filename);
+    const success = exportToExcel(data, filename, createTranslations(), getLocale());
     if (success) {
       alert(t('lottery.exportSuccess'));
     } else {
@@ -90,7 +131,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
       const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
       const filename = `lottery_all_data_${timestamp}.xlsx`;
 
-      const success = exportToExcel(allData, filename);
+      const success = exportToExcel(allData, filename, createTranslations(), getLocale());
       if (success) {
         alert(t('lottery.exportAllSuccess', { count: allData.length }));
       } else {

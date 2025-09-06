@@ -80,6 +80,34 @@
       "showing": "表示",
       "of": "の",
       "results": "結果"
+    },
+    "excel": {
+      "headers": {
+        "stt": "番号",
+        "id": "ID",
+        "code": "コード",
+        "userId": "ユーザーID",
+        "userName": "ユーザー名",
+        "telegramId": "テレグラムID",
+        "inputNumber": "入力番号",
+        "status": "ステータス",
+        "createdAt": "作成日",
+        "used": "使用済み",
+        "unused": "未使用"
+      },
+      "sheets": {
+        "lotteryData": "抽選データ",
+        "statistics": "統計",
+        "detailedData": "詳細データ"
+      },
+      "stats": {
+        "title": "抽選概要統計",
+        "totalCodes": "総コード数:",
+        "usedCodes": "使用済み:",
+        "remainingCodes": "残り:",
+        "usageRate": "使用率:",
+        "exportDate": "エクスポート日:"
+      }
     }
   },
   "languages": {

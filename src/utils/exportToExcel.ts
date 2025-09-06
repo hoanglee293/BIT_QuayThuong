@@ -1,24 +1,93 @@
 import * as XLSX from 'xlsx';
 import { LotteryCode } from '@/types/lottery-types';
 
+// Interface cho translations
+export interface ExcelTranslations {
+  headers: {
+    stt: string;
+    id: string;
+    code: string;
+    userId: string;
+    userName: string;
+    telegramId: string;
+    inputNumber: string;
+    status: string;
+    createdAt: string;
+    used: string;
+    unused: string;
+  };
+  sheets: {
+    lotteryData: string;
+    statistics: string;
+    detailedData: string;
+  };
+  stats: {
+    title: string;
+    totalCodes: string;
+    usedCodes: string;
+    remainingCodes: string;
+    usageRate: string;
+    exportDate: string;
+  };
+}
+
 /**
- * Xuất dữ liệu lottery ra file Excel
+ * Xuất dữ liệu lottery ra file Excel với hỗ trợ đa ngôn ngữ
  * @param data - Mảng dữ liệu lottery codes
  * @param filename - Tên file Excel (mặc định: 'lottery_data.xlsx')
+ * @param translations - Object chứa các bản dịch cho Excel
+ * @param locale - Locale để format ngày tháng (mặc định: 'vi-VN')
  */
-export const exportToExcel = (data: LotteryCode[], filename: string = 'lottery_data.xlsx') => {
+export const exportToExcel = (
+  data: LotteryCode[], 
+  filename: string = 'lottery_data.xlsx',
+  translations?: ExcelTranslations,
+  locale: string = 'vi-VN'
+) => {
   try {
+    // Sử dụng translations mặc định nếu không được cung cấp
+    const defaultTranslations: ExcelTranslations = {
+      headers: {
+        stt: 'STT',
+        id: 'ID',
+        code: 'Mã Code',
+        userId: 'User ID',
+        userName: 'Tên User',
+        telegramId: 'Telegram ID',
+        inputNumber: 'Số nhập',
+        status: 'Trạng thái',
+        createdAt: 'Ngày tạo',
+        used: 'Đã sử dụng',
+        unused: 'Chưa sử dụng'
+      },
+      sheets: {
+        lotteryData: 'Lottery Data',
+        statistics: 'Thống kê',
+        detailedData: 'Dữ liệu chi tiết'
+      },
+      stats: {
+        title: 'THỐNG KÊ TỔNG QUAN LOTTERY',
+        totalCodes: 'Tổng số mã:',
+        usedCodes: 'Đã sử dụng:',
+        remainingCodes: 'Còn lại:',
+        usageRate: 'Tỷ lệ sử dụng:',
+        exportDate: 'Ngày xuất báo cáo:'
+      }
+    };
+
+    const t = translations || defaultTranslations;
+
     // Chuẩn bị dữ liệu cho Excel
     const excelData = data.map((item, index) => ({
-      'STT': index + 1,
-      'ID': item.id,
-      'Mã Code': item.code,
-      'User ID': item.user_id,
-      'Tên User': item.user.name,
-      'Telegram ID': item.user.telegram_id,
-      'Số nhập': item.input_number,
-      'Trạng thái': item.is_used ? 'Đã sử dụng' : 'Chưa sử dụng',
-      'Ngày tạo': new Date(item.created_at).toLocaleString('vi-VN', {
+      [t.headers.stt]: index + 1,
+      [t.headers.id]: item.id,
+      [t.headers.code]: item.code,
+      [t.headers.userId]: item.user_id,
+      [t.headers.userName]: item.user.name,
+      [t.headers.telegramId]: item.user.telegram_id,
+      [t.headers.inputNumber]: item.input_number,
+      [t.headers.status]: item.is_used ? t.headers.used : t.headers.unused,
+      [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -47,7 +116,7 @@ export const exportToExcel = (data: LotteryCode[], filename: string = 'lottery_d
     worksheet['!cols'] = columnWidths;
 
     // Thêm worksheet vào workbook
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Lottery Data');
+    XLSX.utils.book_append_sheet(workbook, worksheet, t.sheets.lotteryData);
 
     // Tạo file Excel và tải xuống
     XLSX.writeFile(workbook, filename);
@@ -60,12 +129,50 @@ export const exportToExcel = (data: LotteryCode[], filename: string = 'lottery_d
 };
 
 /**
- * Xuất dữ liệu lottery với thống kê tổng quan
+ * Xuất dữ liệu lottery với thống kê tổng quan và hỗ trợ đa ngôn ngữ
  * @param data - Mảng dữ liệu lottery codes
  * @param filename - Tên file Excel (mặc định: 'lottery_report.xlsx')
+ * @param translations - Object chứa các bản dịch cho Excel
+ * @param locale - Locale để format ngày tháng (mặc định: 'vi-VN')
  */
-export const exportToExcelWithStats = (data: LotteryCode[], filename: string = 'lottery_report.xlsx') => {
+export const exportToExcelWithStats = (
+  data: LotteryCode[], 
+  filename: string = 'lottery_report.xlsx',
+  translations?: ExcelTranslations,
+  locale: string = 'vi-VN'
+) => {
   try {
+    // Sử dụng translations mặc định nếu không được cung cấp
+    const defaultTranslations: ExcelTranslations = {
+      headers: {
+        stt: 'STT',
+        id: 'ID',
+        code: 'Mã Code',
+        userId: 'User ID',
+        userName: 'Tên User',
+        telegramId: 'Telegram ID',
+        inputNumber: 'Số nhập',
+        status: 'Trạng thái',
+        createdAt: 'Ngày tạo',
+        used: 'Đã sử dụng',
+        unused: 'Chưa sử dụng'
+      },
+      sheets: {
+        lotteryData: 'Lottery Data',
+        statistics: 'Thống kê',
+        detailedData: 'Dữ liệu chi tiết'
+      },
+      stats: {
+        title: 'THỐNG KÊ TỔNG QUAN LOTTERY',
+        totalCodes: 'Tổng số mã:',
+        usedCodes: 'Đã sử dụng:',
+        remainingCodes: 'Còn lại:',
+        usageRate: 'Tỷ lệ sử dụng:',
+        exportDate: 'Ngày xuất báo cáo:'
+      }
+    };
+
+    const t = translations || defaultTranslations;
     const workbook = XLSX.utils.book_new();
 
     // Tính toán thống kê
@@ -76,31 +183,31 @@ export const exportToExcelWithStats = (data: LotteryCode[], filename: string = '
 
     // Tạo sheet thống kê
     const statsData = [
-      ['THỐNG KÊ TỔNG QUAN LOTTERY'],
+      [t.stats.title],
       [''],
-      ['Tổng số mã:', totalCodes],
-      ['Đã sử dụng:', usedCodes],
-      ['Còn lại:', availableCodes],
-      ['Tỷ lệ sử dụng:', `${usageRate}%`],
+      [t.stats.totalCodes, totalCodes],
+      [t.stats.usedCodes, usedCodes],
+      [t.stats.remainingCodes, availableCodes],
+      [t.stats.usageRate, `${usageRate}%`],
       [''],
-      ['Ngày xuất báo cáo:', new Date().toLocaleString('vi-VN')]
+      [t.stats.exportDate, new Date().toLocaleString(locale)]
     ];
 
     const statsWorksheet = XLSX.utils.aoa_to_sheet(statsData);
     statsWorksheet['!cols'] = [{ wch: 25 }, { wch: 15 }];
-    XLSX.utils.book_append_sheet(workbook, statsWorksheet, 'Thống kê');
+    XLSX.utils.book_append_sheet(workbook, statsWorksheet, t.sheets.statistics);
 
     // Tạo sheet dữ liệu chi tiết
     const excelData = data.map((item, index) => ({
-      'STT': index + 1,
-      'ID': item.id,
-      'Mã Code': item.code,
-      'User ID': item.user_id,
-      'Tên User': item.user.name,
-      'Telegram ID': item.user.telegram_id,
-      'Số nhập': item.input_number,
-      'Trạng thái': item.is_used ? 'Đã sử dụng' : 'Chưa sử dụng',
-      'Ngày tạo': new Date(item.created_at).toLocaleString('vi-VN', {
+      [t.headers.stt]: index + 1,
+      [t.headers.id]: item.id,
+      [t.headers.code]: item.code,
+      [t.headers.userId]: item.user_id,
+      [t.headers.userName]: item.user.name,
+      [t.headers.telegramId]: item.user.telegram_id,
+      [t.headers.inputNumber]: item.input_number,
+      [t.headers.status]: item.is_used ? t.headers.used : t.headers.unused,
+      [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -123,7 +230,7 @@ export const exportToExcelWithStats = (data: LotteryCode[], filename: string = '
       { wch: 20 }   // Ngày tạo
     ];
     dataWorksheet['!cols'] = columnWidths;
-    XLSX.utils.book_append_sheet(workbook, dataWorksheet, 'Dữ liệu chi tiết');
+    XLSX.utils.book_append_sheet(workbook, dataWorksheet, t.sheets.detailedData);
 
     // Tạo file Excel và tải xuống
     XLSX.writeFile(workbook, filename);

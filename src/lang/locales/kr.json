@@ -80,6 +80,34 @@
       "showing": "표시",
       "of": "중",
       "results": "결과"
+    },
+    "excel": {
+      "headers": {
+        "stt": "번호",
+        "id": "ID",
+        "code": "코드",
+        "userId": "사용자 ID",
+        "userName": "사용자 이름",
+        "telegramId": "텔레그램 ID",
+        "inputNumber": "입력 번호",
+        "status": "상태",
+        "createdAt": "생성 날짜",
+        "used": "사용됨",
+        "unused": "미사용"
+      },
+      "sheets": {
+        "lotteryData": "추첨 데이터",
+        "statistics": "통계",
+        "detailedData": "상세 데이터"
+      },
+      "stats": {
+        "title": "추첨 개요 통계",
+        "totalCodes": "총 코드 수:",
+        "usedCodes": "사용됨:",
+        "remainingCodes": "남은 것:",
+        "usageRate": "사용률:",
+        "exportDate": "내보내기 날짜:"
+      }
     }
   },
   "languages": {
