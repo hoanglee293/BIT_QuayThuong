@@ -12,7 +12,7 @@ import { Card, CardContent } from '@/ui/card';
 import { useLang } from '@/lang/useLang';
 
 const Lotterys = () => {
-  const { data, pagination, loading, fetchLotteries, refetch } = useLottery();
+  const { data, pagination, loading, fetchLotteries, refetch, currentFilters } = useLottery();
   const { t } = useLang();
 
   const handleFiltersChange = (filters: LotteryFilters) => {
@@ -20,8 +20,9 @@ const Lotterys = () => {
   };
 
   const handlePageChange = (page: number) => {
-    if (pagination) {
+    if (pagination && currentFilters) {
       fetchLotteries({
+        ...currentFilters,
         page,
         limit: pagination.limit
       });
@@ -29,8 +30,9 @@ const Lotterys = () => {
   };
 
   const handleLimitChange = (limit: number) => {
-    if (pagination) {
+    if (currentFilters) {
       fetchLotteries({
+        ...currentFilters,
         page: 1, // Reset to first page when changing limit
         limit
       });
@@ -55,6 +57,7 @@ const Lotterys = () => {
               onFiltersChange={handleFiltersChange}
               loading={loading}
               data={data}
+              currentFilters={currentFilters || undefined}
             />
           </div>
         </div>

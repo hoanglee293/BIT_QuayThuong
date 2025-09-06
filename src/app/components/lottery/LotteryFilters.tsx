@@ -15,12 +15,14 @@ interface LotteryFiltersProps {
   onFiltersChange: (filters: LotteryFilters) => void;
   loading?: boolean;
   data?: any[];
+  currentFilters?: LotteryFilters;
 }
 
 const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   onFiltersChange,
   loading = false,
-  data
+  data,
+  currentFilters
 }) => {
   const { t, lang } = useLang();
   const [filters, setFilters] = useState<LotteryFilters>({
@@ -29,6 +31,13 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
     sort_by: 'created_at',
     sort_order: 'DESC'
   });
+
+  // Sync local state with currentFilters prop
+  React.useEffect(() => {
+    if (currentFilters) {
+      setFilters(currentFilters);
+    }
+  }, [currentFilters]);
 
   const [showAdvanced, setShowAdvanced] = useState(false);
 
@@ -121,7 +130,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
     try {
       // Gọi API để lấy tất cả dữ liệu lottery
       const response = await axiosClient.get('/lotterys?get_all=true');
-      const allData = response.data.data || [];
+      const allData = response.data.data.map((item: any) => item.is_used === false) || [];
 
       if (allData.length === 0) {
         alert(t('lottery.noDataToExport'));

@@ -10,6 +10,7 @@ interface UseLotteryReturn {
   data: LotteryCode[];
   pagination: Pagination | null;
   loading: boolean;
+  currentFilters: LotteryFilters | null;
   fetchLotteries: (filters: LotteryFilters) => Promise<void>;
   refetch: () => void;
 }
@@ -100,6 +101,7 @@ export const useLottery = (): UseLotteryReturn => {
     data,
     pagination,
     loading,
+    currentFilters,
     fetchLotteries,
     refetch
   };
