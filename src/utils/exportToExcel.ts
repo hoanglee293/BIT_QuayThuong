@@ -1,5 +1,5 @@
 import * as XLSX from 'xlsx';
-import { LotteryCode } from '@/types/lottery';
+import { LotteryCode } from '@/types/lottery-types';
 
 /**
  * Xuất dữ liệu lottery ra file Excel

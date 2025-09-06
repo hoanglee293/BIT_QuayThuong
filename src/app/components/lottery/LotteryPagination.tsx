@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
-import { Pagination } from '@/types/lottery';
+import { Pagination } from '@/types/lottery-types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface LotteryPaginationProps {

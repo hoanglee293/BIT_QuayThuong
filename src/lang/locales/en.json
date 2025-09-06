@@ -1,7 +1,8 @@
 {
   "lottery": {
     "overview": "Overview",
-    "totalCodes": "Total Codes",
+    "totalCodes": "Total",
+    "total": "Total",
     "usedCodes": "Used",
     "remainingCodes": "Remaining",
     "exportFilteredData": "Export Excel Filtered Data",
@@ -15,6 +16,8 @@
     "badRequest": "Bad Request",
     "connectionError": "Unable to connect to server. Please try again later.",
     "dataLoadError": "An error occurred while loading data",
+    "exportAll": "Export All",
+    "exportFiltered": "Export Filtered",
     "filters": {
       "title": "Lottery Code Filters",
       "generalSearch": "General Search",

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { LotteryCode, LotteryResponse, LotteryFilters, Pagination } from '@/types/lottery';
+import { LotteryCode, LotteryResponse, LotteryFilters, Pagination } from '@/types/lottery-types';
 import { axiosClient } from '@/utils/axiosClient';
 
 interface UseLotteryReturn {

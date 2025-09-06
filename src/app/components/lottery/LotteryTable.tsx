@@ -3,8 +3,8 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/ui/table';
 import { Badge } from '@/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
-import { LotteryCode } from '@/types/lottery';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
+import { LotteryCode } from '@/types/lottery-types';
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import { Copy, CheckCircle, XCircle } from 'lucide-react';
@@ -14,9 +14,10 @@ import { useLang } from '@/lang/useLang';
 interface LotteryTableProps {
   data: LotteryCode[];
   loading?: boolean;
+  total?: number;
 }
 
-const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) => {
+const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, total = 0 }) => {
   const { t } = useLang();
   const [copiedCode, setCopiedCode] = React.useState<string | null>(null);
 
@@ -71,22 +72,19 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
 
   return (
     <Card className="p-8 shadow-inset dark:shadow-none border-none dark:border-solid">
-      <CardHeader className="p-0 pb-5">
-        <CardTitle>{t('lottery.table.title')} ({t('lottery.table.results', { count: data.length })})</CardTitle>
-      </CardHeader>
+      <div className="flex items-center justify-between w-full gap-2 text-2xl font-bold mb-5">{t('lottery.table.title')} <span className="text-xl text-theme-primary-500">
+      {t('lottery.total')}: { total }</span></div>
       <CardContent>
-        <div className="overflow-x-auto p-2 bg-white dark:bg-black rounded-xl border border-white/20 dark:border-slate-700/50">
+        <div className="overflow-x-auto bg-white dark:bg-black rounded-xl border border-white/20 dark:border-slate-700/50">
           <Table className="table-fixed w-full">
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[8%] text-center">{t('lottery.table.id')}</TableHead>
+            <TableHeader className="rounded-t-xl">
+              <TableRow className="bg-theme-primary-500 text-white">
+                <TableHead className="w-[8%] text-center rounded-tl-lg">{t('lottery.table.id')}</TableHead>
                 <TableHead className="w-[18%] text-center">{t('lottery.table.lotteryCode')}</TableHead>
                 <TableHead className="w-[10%] text-center">{t('lottery.table.uid')}</TableHead>
                 <TableHead className="w-[15%] text-center">{t('lottery.table.userName')}</TableHead>
                 <TableHead className="w-[15%] text-center">{t('lottery.table.telegramId')}</TableHead>
-                <TableHead className="w-[12%] text-center">{t('lottery.table.status')}</TableHead>
-                <TableHead className="w-[15%] text-center">{t('lottery.table.createdAt')}</TableHead>
-                <TableHead className="w-[7%] text-center">{t('lottery.table.actions')}</TableHead>
+                <TableHead className="w-[15%] text-center rounded-tr-lg">{t('lottery.table.createdAt')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -129,42 +127,11 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false }) =>
                       {lottery.user?.telegram_id || t('lottery.table.na')}
                     </span>
                   </TableCell>
-                  <TableCell className="text-center">
-                    <div className="flex justify-center">
-                      <Badge 
-                        variant={lottery.is_used ? "destructive" : "default"}
-                        className="flex items-center gap-1 w-fit"
-                      >
-                        {lottery.is_used ? (
-                          <>
-                            <XCircle className="h-3 w-3" />
-                            {t('lottery.table.used')}
-                          </>
-                        ) : (
-                          <>
-                            <CheckCircle className="h-3 w-3" />
-                            {t('lottery.table.unused')}
-                          </>
-                        )}
-                      </Badge>
-                    </div>
-                  </TableCell>
+
                   <TableCell className="text-center">
                     <span className="text-sm text-gray-600">
                       {formatDate(lottery.created_at)}
                     </span>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <div className="flex justify-center">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleCopyCode(lottery.code)}
-                        className="text-xs"
-                      >
-                        {t('lottery.table.copy')}
-                      </Button>
-                    </div>
                   </TableCell>
                 </TableRow>
               ))}

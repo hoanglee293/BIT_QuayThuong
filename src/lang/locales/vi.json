@@ -2,6 +2,7 @@
   "lottery": {
     "overview": "Tổng quan",
     "totalCodes": "Tổng mã",
+    "total": "Tổng",
     "usedCodes": "Đã sử dụng",
     "remainingCodes": "Còn lại",
     "exportFilteredData": "Xuất Excel dữ liệu theo bộ lọc",
@@ -15,6 +16,8 @@
     "badRequest": "Bad Request",
     "connectionError": "Không thể kết nối đến server. Vui lòng thử lại sau.",
     "dataLoadError": "Có lỗi xảy ra khi tải dữ liệu",
+    "exportAll": "Xuất tất cả",
+    "exportFiltered": "Xuất theo bộ lọc",
     "filters": {
       "title": "Bộ lọc mã dự thưởng",
       "generalSearch": "Tìm kiếm tổng quát",

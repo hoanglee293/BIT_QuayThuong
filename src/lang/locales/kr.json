@@ -1,7 +1,8 @@
 {
   "lottery": {
     "overview": "개요",
-    "totalCodes": "총 코드",
+    "totalCodes": "코드",
+    "total": "총",
     "usedCodes": "사용됨",
     "remainingCodes": "남은 것",
     "exportFilteredData": "필터링된 데이터 Excel 내보내기",
@@ -15,6 +16,8 @@
     "badRequest": "잘못된 요청",
     "connectionError": "서버에 연결할 수 없습니다. 나중에 다시 시도해 주세요.",
     "dataLoadError": "데이터 로드 중 오류가 발생했습니다",
+    "exportAll": "모두 내보내기",
+    "exportFiltered": "필터링된 데이터 내보내기",
     "filters": {
       "title": "추첨 코드 필터",
       "generalSearch": "일반 검색",

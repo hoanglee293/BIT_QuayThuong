@@ -2,6 +2,7 @@
   "lottery": {
     "overview": "概要",
     "totalCodes": "総コード数",
+    "total": "総数",
     "usedCodes": "使用済み",
     "remainingCodes": "残り",
     "exportFilteredData": "フィルター済みデータをExcelでエクスポート",
@@ -15,6 +16,8 @@
     "badRequest": "不正なリクエスト",
     "connectionError": "サーバーに接続できません。後でもう一度お試しください。",
     "dataLoadError": "データの読み込み中にエラーが発生しました",
+    "exportAll": "すべてエクスポート",
+    "exportFiltered": "フィルター済みデータエクスポート",
     "filters": {
       "title": "抽選コードフィルター",
       "generalSearch": "一般検索",

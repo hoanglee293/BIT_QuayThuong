@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Lotterys from './lotterys/page';
+import Lotterys from './lotterys/LotteryPage';
 import { useAuth } from '@/hooks/useAuth';
 
 function HomeContent() {
