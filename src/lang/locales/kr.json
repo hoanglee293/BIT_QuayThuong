@@ -1,11 +1,22 @@
 {
   "header":{
-    "connect": "Connect",
-    "welcome": "Welcome",
-    "logout": "Logout",
-    "connecting": "Connecting"
+    "connect": "연결",
+    "welcome": "환영합니다",
+    "logout": "로그아웃",
+    "connecting": "연결 중",
+    "adminProfile": "관리자 프로필",
+    "role": "역할",
+    "emailCopied": "이메일이 클립보드에 복사되었습니다"
+  },
+  "connect": "연결",
+  "overview": {
+    "universalAccount": {
+      "receive": "받기",
+      "send": "보내기"
+    }
   },
   "lottery": {
+    "management": "추첨 관리",
     "overview": "개요",
     "totalCodes": "코드",
     "total": "총",

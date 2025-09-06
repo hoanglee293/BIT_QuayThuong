@@ -1,11 +1,22 @@
 {
   "header":{
-    "connect": "Connect",
-    "welcome": "Welcome",
-    "logout": "Logout",
-    "connecting": "Connecting"
+    "connect": "Kết nối",
+    "welcome": "Chào mừng",
+    "logout": "Đăng xuất",
+    "connecting": "Đang kết nối",
+    "adminProfile": "Hồ sơ Admin",
+    "role": "Vai trò",
+    "emailCopied": "Email đã được sao chép vào clipboard"
+  },
+  "connect": "Kết nối",
+  "overview": {
+    "universalAccount": {
+      "receive": "Nhận",
+      "send": "Gửi"
+    }
   },
   "lottery": {
+    "management": "Quản lý quay thưởng",
     "overview": "Tổng quan",
     "totalCodes": "Tổng mã",
     "total": "Tổng",

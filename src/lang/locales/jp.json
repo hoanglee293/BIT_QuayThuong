@@ -1,11 +1,22 @@
 {
   "header":{
-    "connect": "Connect",
-    "welcome": "Welcome",
-    "logout": "Logout",
-    "connecting": "Connecting"
+    "connect": "接続",
+    "welcome": "ようこそ",
+    "logout": "ログアウト",
+    "connecting": "接続中",
+    "adminProfile": "管理者プロフィール",
+    "role": "役割",
+    "emailCopied": "メールアドレスをクリップボードにコピーしました"
+  },
+  "connect": "接続",
+  "overview": {
+    "universalAccount": {
+      "receive": "受信",
+      "send": "送信"
+    }
   },
   "lottery": {
+    "management": "抽選管理",
     "overview": "概要",
     "totalCodes": "総コード数",
     "total": "総数",

@@ -3,9 +3,20 @@
     "connect": "Connect",
     "welcome": "Welcome",
     "logout": "Logout",
-    "connecting": "Connecting"
+    "connecting": "Connecting",
+    "adminProfile": "Admin Profile",
+    "role": "Role",
+    "emailCopied": "Email copied to clipboard"
+  },
+  "connect": "Connect",
+  "overview": {
+    "universalAccount": {
+      "receive": "Receive",
+      "send": "Send"
+    }
   },
   "lottery": {
+    "management": "Prize draw management",
     "overview": "Overview",
     "totalCodes": "Total",
     "total": "Total",

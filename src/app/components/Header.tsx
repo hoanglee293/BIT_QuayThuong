@@ -46,7 +46,7 @@ const Header = () => {
 
     const listSidebar = [
         {
-            name: "Prize draw management",
+            name: t('lottery.management'),
             icon: Coins,
             href: "/lotterys",
             logoPump: false,
@@ -143,15 +143,15 @@ const Header = () => {
                                                     <div className='p-3 dark:bg-gray-800 bg-gray-400 rounded-md'>
                                                         {isAuthenticated && admin && (
                                                             <div className='flex flex-col gap-1'>
-                                                                <span className='text-white'>Admin Profile</span>
+                                                                <span className='text-white'>{t('header.adminProfile')}</span>
                                                                 <span className='text-lg font-semibold text-white'>{admin.username}</span>
-                                                                <div className='dark:text-[#8B5CF6] text-[#00beeb] font-semibold'><span className='text-sm italic text-white dark:text-text-gray-400'>Role: {admin.role}</span></div>
+                                                                <div className='dark:text-[#8B5CF6] text-[#00beeb] font-semibold'><span className='text-sm italic text-white dark:text-text-gray-400'>{t('header.role')}: {admin.role}</span></div>
                                                             </div>
                                                         )}
                                                     </div>
                                                     <div className='flex items-center gap-2  w-full' onClick={() => {
                                                         navigator.clipboard.writeText(admin?.email || '');
-                                                        toast.success('Email copied to clipboard');
+                                                        toast.success(t('header.emailCopied'));
                                                     }}>
                                                         <span className="2xl:text-sm text-xs text-yellow-500 italic hidden md:inline">{admin?.email}</span>
                                                         <Copy className="h-3 w-3" />
