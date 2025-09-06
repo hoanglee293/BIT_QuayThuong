@@ -64,7 +64,8 @@
       "ascending": "Tăng dần",
       "itemsPerPage": "Số lượng/trang",
       "search": "Tìm kiếm",
-      "reset": "Đặt lại"
+      "reset": "Đặt lại",
+      "startDateGreaterThanEndDate": "Ngày bắt đầu không thể lớn hơn ngày kết thúc"
     },
     "table": {
       "title": "Danh sách mã dự thưởng",

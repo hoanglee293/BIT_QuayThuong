@@ -64,7 +64,8 @@
       "ascending": "Ascending",
       "itemsPerPage": "Items per page",
       "search": "Search",
-      "reset": "Reset"
+      "reset": "Reset",
+      "startDateGreaterThanEndDate": "Start date cannot be greater than end date"
     },
     "table": {
       "title": "Lottery Codes List",

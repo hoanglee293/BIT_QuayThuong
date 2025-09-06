@@ -64,7 +64,8 @@
       "ascending": "오름차순",
       "itemsPerPage": "페이지당 항목 수",
       "search": "검색",
-      "reset": "재설정"
+      "reset": "재설정",
+      "startDateGreaterThanEndDate": "시작 날짜는 종료 날짜보다 클 수 없습니다"
     },
     "table": {
       "title": "추첨 코드 목록",

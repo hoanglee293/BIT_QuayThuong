@@ -268,7 +268,6 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
                 <SelectItem value="created_at">{t('lottery.filters.createdAt')}</SelectItem>
                 <SelectItem value="code">{t('lottery.filters.code')}</SelectItem>
                 <SelectItem value="input_number">{t('lottery.filters.inputNumber')}</SelectItem>
-                <SelectItem value="is_used">{t('lottery.filters.isUsed')}</SelectItem>
               </SelectContent>
             </Select>
           </div>

@@ -6,14 +6,13 @@ import { LotteryFilters } from '@/types/lottery-types';
 import LotteryFiltersComponent from '@/app/components/lottery/LotteryFilters';
 import LotteryTable from '@/app/components/lottery/LotteryTable';
 import LotteryPagination from '@/app/components/lottery/LotteryPagination';
-import { Alert, AlertDescription } from '@/ui/alert';
-import { AlertCircle, RefreshCw, Ticket, TrendingUp, Users, Award } from 'lucide-react';
+import { RefreshCw, Ticket, TrendingUp, Users, Award } from 'lucide-react';
 import { Button } from '@/ui/button';
 import { Card, CardContent } from '@/ui/card';
 import { useLang } from '@/lang/useLang';
 
 const Lotterys = () => {
-  const { data, pagination, loading, error, fetchLotteries, refetch } = useLottery();
+  const { data, pagination, loading, fetchLotteries, refetch } = useLottery();
   const { t } = useLang();
 
   const handleFiltersChange = (filters: LotteryFilters) => {
@@ -48,14 +47,6 @@ const Lotterys = () => {
     <div className="min-h-screen bg-white dark:bg-black w-full">
       {/* Header Section */}
       <div className="container mx-auto px-4 py-8 space-y-8">
-        {/* Error Alert */}
-        {error && (
-          <Alert variant="destructive" className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 backdrop-blur-sm">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription className="text-red-800 dark:text-red-200">{error}</AlertDescription>
-          </Alert>
-        )}
-
         {/* Filters */}
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/5 via-purple-600/5 to-pink-600/5 rounded-2xl blur-2xl"></div>

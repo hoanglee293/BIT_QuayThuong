@@ -9,7 +9,7 @@
     "emailCopied": "メールアドレスをクリップボードにコピーしました"
   },
   "connect": "接続",
-  "overview": {
+  "overview": { 
     "universalAccount": {
       "receive": "受信",
       "send": "送信"
@@ -64,7 +64,8 @@
       "ascending": "昇順",
       "itemsPerPage": "ページあたりの項目数",
       "search": "検索",
-      "reset": "リセット"
+      "reset": "リセット",
+      "startDateGreaterThanEndDate": "開始日は終了日より大きくなることはできません"
     },
     "table": {
       "title": "抽選コード一覧",

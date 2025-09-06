@@ -3,21 +3,22 @@
 import { useState, useEffect, useCallback } from 'react';
 import { LotteryCode, LotteryResponse, LotteryFilters, Pagination } from '@/types/lottery-types';
 import { axiosClient } from '@/utils/axiosClient';
+import toast from 'react-hot-toast';
+import { useLang } from '@/lang/useLang';
 
 interface UseLotteryReturn {
   data: LotteryCode[];
   pagination: Pagination | null;
   loading: boolean;
-  error: string | null;
   fetchLotteries: (filters: LotteryFilters) => Promise<void>;
   refetch: () => void;
 }
 
 export const useLottery = (): UseLotteryReturn => {
+  const { t } = useLang();
   const [data, setData] = useState<LotteryCode[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [currentFilters, setCurrentFilters] = useState<LotteryFilters>({
     page: 1,
     limit: 10,
@@ -39,7 +40,6 @@ export const useLottery = (): UseLotteryReturn => {
 
   const fetchLotteries = useCallback(async (filters: LotteryFilters) => {
     setLoading(true);
-    setError(null);
     setCurrentFilters(filters);
 
     try {
@@ -59,7 +59,13 @@ export const useLottery = (): UseLotteryReturn => {
           errorMessage = 'Unauthorized - Vui lòng đăng nhập lại';
         } else if (err.response.status === 400) {
           errorMessage = err.response.data?.message || 'Bad Request';
-        } else {
+        } else if (err.response.data?.message.includes('Start date cannot be greater')) {
+          errorMessage = t('lottery.filters.startDateGreaterThanEndDate');
+        }else if (err.response.data?.message.includes('Unauthorized')) {
+          errorMessage = t('lottery.unauthorized');
+        }else if (err.response.data?.message.includes('should not be empty')) {
+          errorMessage = t('lottery.filters.shouldNotBeEmpty');
+        }else {
           errorMessage = err.response.data?.message || `HTTP error! status: ${err.response.status}`;
         }
       } else if (err.request) {
@@ -70,7 +76,7 @@ export const useLottery = (): UseLotteryReturn => {
         errorMessage = err.message || errorMessage;
       }
       
-      setError(errorMessage);
+      toast.error(errorMessage);
       setData([]);
       setPagination(null);
       console.error('Error fetching lotteries:', err);
@@ -94,7 +100,6 @@ export const useLottery = (): UseLotteryReturn => {
     data,
     pagination,
     loading,
-    error,
     fetchLotteries,
     refetch
   };

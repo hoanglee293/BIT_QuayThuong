@@ -29,9 +29,10 @@ Component phân trang với:
 ### 4. useLottery Hook
 Custom hook quản lý state và API calls:
 - Fetch dữ liệu từ API
-- Quản lý loading, error states
+- Quản lý loading state
 - Build query string từ filters
 - Handle authentication
+- Error handling via toast notifications
 
 ## Usage
 
@@ -42,7 +43,7 @@ import LotteryTable from '@/app/components/lottery/LotteryTable';
 import LotteryPagination from '@/app/components/lottery/LotteryPagination';
 
 const Lotterys = () => {
-  const { data, pagination, loading, error, fetchLotteries } = useLottery();
+  const { data, pagination, loading, fetchLotteries } = useLottery();
 
   return (
     <div>
