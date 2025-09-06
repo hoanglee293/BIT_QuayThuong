@@ -26,7 +26,7 @@ export default function Display() {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
-                    className='w-max max-w-[130px] 2xl:max-w-[200px] xl:px-2 px-1 py-2 bg-white dark:bg-theme-neutral-1000 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg transition-colors' 
+                    className='w-max max-w-[130px] 2xl:max-w-[200px] xl:px-2 px-1 py-2 mt-2 bg-white dark:bg-theme-neutral-1000 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg transition-colors' 
                     align="end" 
                     style={{ width: '200px' }}
                 >

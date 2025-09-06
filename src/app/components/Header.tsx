@@ -133,7 +133,7 @@ const Header = () => {
                                         {t('connect')}
                                     </button>
                                 ) : (
-                                    <DropdownMenu>
+                                    <DropdownMenu >
                                         <DropdownMenuTrigger asChild>
                                             <button className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 2xl:py-[6px] py-[3px] rounded-md transition-colors whitespace-nowrap flex items-center gap-1 outline-none">
                                                 <Wallet2 className="2xl:h-4 2xl:w-4 h-3 w-3 mr-1" />
@@ -141,7 +141,7 @@ const Header = () => {
                                                 <ChevronDown size={14} className="ml-1" />
                                             </button>
                                         </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end" className="w-56 mt-2.5 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800">
+                                        <DropdownMenuContent align="end" className="w-56 mt-3.5 relative z-50 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800">
                                             <DropdownMenuItem
                                                 className="dropdown-item cursor-pointer text-gray-700 dark:text-neutral-200"
                                             >
@@ -295,8 +295,6 @@ const Header = () => {
                                             </button>
                                         </div>
                                     )}
-
-
                                 </div>
                             </div>
                         </div>

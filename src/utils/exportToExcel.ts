@@ -74,9 +74,9 @@ export const exportToExcel = (
       [t.headers.stt]: index + 1,
       [t.headers.id]: item.id,
       [t.headers.code]: item.code,
+      [t.headers.inputNumber]: item.input_number,
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
-      [t.headers.inputNumber]: item.input_number,
       [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
         year: 'numeric',
         month: '2-digit',
@@ -96,9 +96,9 @@ export const exportToExcel = (
       { wch: 5 },   // STT
       { wch: 10 },  // ID
       { wch: 20 },  // Mã Code
+      { wch: 10 },  // Số nhập
       { wch: 25 },  // Tên User
       { wch: 15 },  // Telegram ID
-      { wch: 10 },  // Số nhập
       { wch: 20 }   // Ngày tạo
     ];
     worksheet['!cols'] = columnWidths;
@@ -136,9 +136,9 @@ export const exportToExcelWithStats = (
         stt: 'STT',
         id: 'ID',
         code: 'Mã Code',
+        inputNumber: 'Số nhập',
         userName: 'Tên User',
         telegramId: 'Telegram ID',
-        inputNumber: 'Số nhập',
         createdAt: 'Ngày tạo'
       },
       sheets: {
@@ -186,9 +186,9 @@ export const exportToExcelWithStats = (
       [t.headers.stt]: index + 1,
       [t.headers.id]: item.id,
       [t.headers.code]: item.code,
+      [t.headers.inputNumber]: item.input_number,
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
-      [t.headers.inputNumber]: item.input_number,
       [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
         year: 'numeric',
         month: '2-digit',
@@ -205,8 +205,8 @@ export const exportToExcelWithStats = (
       { wch: 10 },  // ID
       { wch: 20 },  // Mã Code
       { wch: 25 },  // Tên User
-      { wch: 15 },  // Telegram ID
-      { wch: 10 },  // Số nhập
+      { wch: 20 },  // Telegram ID
+      { wch: 20 },  // Số nhập
       { wch: 20 }   // Ngày tạo
     ];
     dataWorksheet['!cols'] = columnWidths;

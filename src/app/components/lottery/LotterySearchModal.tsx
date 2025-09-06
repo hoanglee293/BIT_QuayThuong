@@ -59,7 +59,9 @@ const LotterySearchModal: React.FC<LotterySearchModalProps> = ({
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-green-600/5 via-emerald-600/5 to-teal-600/5 rounded-lg blur-xl"></div>
             <div className="relative">
-              <span className="text-sm font-mono font-medium text-yellow-400">Mã dự thưởng: {lotteryData.code} thuộc về</span>
+              <span className="text-sm font-mono font-medium text-yellow-400">
+                {t('lottery.search.lotteryCodeBelongsTo', { code: lotteryData.code })}
+              </span>
               <CardContent>
                 <div className="text-center space-y-4 mt-3">
                   {/* Input Number - Main Result */}
