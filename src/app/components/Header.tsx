@@ -50,6 +50,12 @@ const Header = () => {
             icon: Coins,
             href: "/lotterys",
             logoPump: false,
+        },
+        {
+            name: t('lottery.search.title'),
+            icon: Search,
+            href: "/lottery-search",
+            logoPump: false,
         }
 
     ]

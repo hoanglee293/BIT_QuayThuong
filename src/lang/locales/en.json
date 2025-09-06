@@ -121,6 +121,32 @@
         "usageRate": "Usage Rate:",
         "exportDate": "Export Date:"
       }
+    },
+    "search": {
+      "title": "Lottery Code",
+      "description": "Enter a lottery code to find its corresponding input number",
+      "searchTitle": "Search by Code",
+      "codePlaceholder": "Enter lottery code (e.g., 64372)",
+      "searching": "Searching...",
+      "search": "Search",
+      "codeRequired": "Please enter a lottery code",
+      "notFound": "Lottery code not found",
+      "error": "Error searching lottery code",
+      "infoTitle": "How to use:",
+      "info1": "Enter the exact lottery code you want to search",
+      "info2": "The system will return the corresponding input number",
+      "info3": "Only valid and existing codes will return results",
+      "resultTitle": "Lottery Code Found",
+      "inputNumber": "Input Number",
+      "copyInputNumber": "Copy Input Number",
+      "details": "Lottery Details",
+      "code": "Code",
+      "status": "Status",
+      "used": "Used",
+      "available": "Available",
+      "user": "User",
+      "createdAt": "Created",
+      "close": "Close"
     }
   },
   "login": {

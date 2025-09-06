@@ -121,6 +121,32 @@
         "usageRate": "사용률:",
         "exportDate": "내보내기 날짜:"
       }
+    },
+    "search": {
+      "title": "당첨 코드",
+      "description": "추첨 코드를 입력하여 해당하는 입력 번호를 찾으세요",
+      "searchTitle": "코드로 검색",
+      "codePlaceholder": "추첨 코드를 입력하세요 (예: 64372)",
+      "searching": "검색 중...",
+      "search": "검색",
+      "codeRequired": "추첨 코드를 입력해 주세요",
+      "notFound": "추첨 코드를 찾을 수 없습니다",
+      "error": "추첨 코드 검색 중 오류가 발생했습니다",
+      "infoTitle": "사용 방법:",
+      "info1": "검색하고자 하는 정확한 추첨 코드를 입력하세요",
+      "info2": "시스템이 해당하는 입력 번호를 반환합니다",
+      "info3": "유효하고 존재하는 코드만 결과를 반환합니다",
+      "resultTitle": "추첨 코드를 찾았습니다",
+      "inputNumber": "입력 번호",
+      "copyInputNumber": "입력 번호 복사",
+      "details": "추첨 세부사항",
+      "code": "코드",
+      "status": "상태",
+      "used": "사용됨",
+      "available": "사용 가능",
+      "user": "사용자",
+      "createdAt": "생성일",
+      "close": "닫기"
     }
   },
   "login": {

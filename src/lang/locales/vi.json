@@ -121,6 +121,32 @@
         "usageRate": "Tỷ lệ sử dụng:",
         "exportDate": "Ngày xuất báo cáo:"
       }
+    },
+    "search": {
+      "title": "Mã dự thưởng",
+      "description": "Nhập mã dự thưởng để tìm số nhập tương ứng",
+      "searchTitle": "Tìm kiếm theo mã",
+      "codePlaceholder": "Nhập mã dự thưởng (ví dụ: 64372)",
+      "searching": "Đang tìm kiếm...",
+      "search": "Tìm kiếm",
+      "codeRequired": "Vui lòng nhập mã dự thưởng",
+      "notFound": "Không tìm thấy mã dự thưởng",
+      "error": "Lỗi khi tìm kiếm mã dự thưởng",
+      "infoTitle": "Cách sử dụng:",
+      "info1": "Nhập chính xác mã dự thưởng bạn muốn tìm kiếm",
+      "info2": "Hệ thống sẽ trả về số nhập tương ứng",
+      "info3": "Chỉ có mã hợp lệ và tồn tại mới trả về kết quả",
+      "resultTitle": "Tìm thấy mã dự thưởng",
+      "inputNumber": "Số nhập",
+      "copyInputNumber": "Sao chép số nhập",
+      "details": "Chi tiết mã dự thưởng",
+      "code": "Mã",
+      "status": "Trạng thái",
+      "used": "Đã sử dụng",
+      "available": "Có sẵn",
+      "user": "Người dùng",
+      "createdAt": "Ngày tạo",
+      "close": "Đóng"
     }
   },
   "login": {

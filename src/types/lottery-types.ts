@@ -9,7 +9,7 @@ export interface LotteryCode {
   code: string;
   user_id: number;
   input_number: number;
-  is_used: boolean;
+  is_used?: boolean;
   created_at: string;
   user: User;
 }
