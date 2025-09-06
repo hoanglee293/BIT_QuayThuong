@@ -35,6 +35,7 @@
     "dataLoadError": "데이터 로드 중 오류가 발생했습니다",
     "exportAll": "모두 내보내기",
     "exportFiltered": "필터링된 데이터 내보내기",
+    "shouldNotBeEmpty": "비어있으면 안 됩니다",
     "filters": {
       "title": "추첨 코드 필터",
       "generalSearch": "일반 검색",
@@ -65,7 +66,8 @@
       "itemsPerPage": "페이지당 항목 수",
       "search": "검색",
       "reset": "재설정",
-      "startDateGreaterThanEndDate": "시작 날짜는 종료 날짜보다 클 수 없습니다"
+      "startDateGreaterThanEndDate": "시작 날짜는 종료 날짜보다 클 수 없습니다",
+      "shouldNotBeEmpty": "비어있으면 안 됩니다"
     },
     "table": {
       "title": "추첨 코드 목록",
@@ -98,7 +100,6 @@
         "stt": "번호",
         "id": "ID",
         "code": "코드",
-        "userId": "사용자 ID",
         "userName": "사용자 이름",
         "telegramId": "텔레그램 ID",
         "inputNumber": "입력 번호",
