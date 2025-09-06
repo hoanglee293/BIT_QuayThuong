@@ -1,4 +1,10 @@
 {
+  "header":{
+    "connect": "Connect",
+    "welcome": "Welcome",
+    "logout": "Logout",
+    "connecting": "Connecting"
+  },
   "lottery": {
     "overview": "개요",
     "totalCodes": "코드",

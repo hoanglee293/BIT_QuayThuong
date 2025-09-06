@@ -162,7 +162,7 @@ const Header = () => {
                                                 logout();
                                             }}>
                                                 <LogOut className="mr-2 h-4 w-4" />
-                                                <span>{t('header.wallet.logout')}</span>
+                                                <span>{t('header.logout')}</span>
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
@@ -172,7 +172,7 @@ const Header = () => {
                             <button
                                 className="hover:bg-white hover:text-theme-primary-500 bg-theme-primary-500 text-white dark:text-neutral-100 font-medium px-4 md:px-6 py-[6px] rounded-full transition-colors whitespace-nowrap"
                             >
-                                {t('header.wallet.connecting')}
+                                {t('header.connecting')}
                             </button>
                         )}
                     </div>

@@ -73,12 +73,12 @@ export default function ModalSignin({ isOpen, onClose }: ModalSigninProps) {
           <div className="w-full inline-flex flex-col justify-start items-center gap-4">
             <div className="self-stretch inline-flex justify-between items-center">
               <div className="justify-start text-theme-primary-500 dark:text-theme-primary-500 text-lg font-semibold uppercase leading-relaxed">
-                {t('header.wallet.connect')}
+                {t('header.connect')}
               </div>
             </div>
             <div className="flex flex-col justify-start items-center gap-1.5">
               <div className="justify-start text-gray-900 dark:text-white text-lg font-medium uppercase leading-relaxed">
-                {t('header.wallet.welcome')}
+                {t('header.welcome')}
               </div>
             </div>
             

@@ -1,4 +1,10 @@
 {
+  "header":{
+    "connect": "Connect",
+    "welcome": "Welcome",
+    "logout": "Logout",
+    "connecting": "Connecting"
+  },
   "lottery": {
     "overview": "Tổng quan",
     "totalCodes": "Tổng mã",
