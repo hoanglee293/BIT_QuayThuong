@@ -7,7 +7,6 @@ export interface ExcelTranslations {
     stt: string;
     id: string;
     code: string;
-    userId: string;
     userName: string;
     telegramId: string;
     inputNumber: string;
@@ -48,10 +47,9 @@ export const exportToExcel = (
         stt: 'STT',
         id: 'ID',
         code: 'Mã Code',
-        userId: 'User ID',
+        inputNumber: 'Số nhập',
         userName: 'Tên User',
         telegramId: 'Telegram ID',
-        inputNumber: 'Số nhập',
         createdAt: 'Ngày tạo'
       },
       sheets: {
@@ -76,7 +74,6 @@ export const exportToExcel = (
       [t.headers.stt]: index + 1,
       [t.headers.id]: item.id,
       [t.headers.code]: item.code,
-      [t.headers.userId]: item.user_id,
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
       [t.headers.inputNumber]: item.input_number,
@@ -99,7 +96,6 @@ export const exportToExcel = (
       { wch: 5 },   // STT
       { wch: 10 },  // ID
       { wch: 20 },  // Mã Code
-      { wch: 10 },  // User ID
       { wch: 25 },  // Tên User
       { wch: 15 },  // Telegram ID
       { wch: 10 },  // Số nhập
@@ -140,7 +136,6 @@ export const exportToExcelWithStats = (
         stt: 'STT',
         id: 'ID',
         code: 'Mã Code',
-        userId: 'User ID',
         userName: 'Tên User',
         telegramId: 'Telegram ID',
         inputNumber: 'Số nhập',
@@ -191,7 +186,6 @@ export const exportToExcelWithStats = (
       [t.headers.stt]: index + 1,
       [t.headers.id]: item.id,
       [t.headers.code]: item.code,
-      [t.headers.userId]: item.user_id,
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
       [t.headers.inputNumber]: item.input_number,
@@ -210,7 +204,6 @@ export const exportToExcelWithStats = (
       { wch: 5 },   // STT
       { wch: 10 },  // ID
       { wch: 20 },  // Mã Code
-      { wch: 10 },  // User ID
       { wch: 25 },  // Tên User
       { wch: 15 },  // Telegram ID
       { wch: 10 },  // Số nhập

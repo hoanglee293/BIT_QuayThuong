@@ -98,7 +98,6 @@
         "stt": "STT",
         "id": "ID",
         "code": "Mã Code",
-        "userId": "User ID",
         "userName": "Tên User",
         "telegramId": "Telegram ID",
         "inputNumber": "Số nhập",

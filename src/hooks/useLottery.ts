@@ -29,13 +29,13 @@ export const useLottery = (): UseLotteryReturn => {
 
   const buildQueryString = (filters: LotteryFilters): string => {
     const params = new URLSearchParams();
-    
+
     Object.entries(filters).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== '') {
         params.append(key, value.toString());
       }
     });
-    
+
     return params.toString();
   };
 
@@ -46,37 +46,26 @@ export const useLottery = (): UseLotteryReturn => {
     try {
       const queryString = buildQueryString(filters);
       const url = `/lotterys${queryString ? `?${queryString}` : ''}`;
-      
+
       const response = await axiosClient.get<LotteryResponse>(url);
 
       setData(response.data.data || []);
       setPagination(response.data.pagination || null);
     } catch (err: any) {
-      let errorMessage = 'Có lỗi xảy ra khi tải dữ liệu';
-      
-      if (err.response) {
-        // Server responded with error status
-        if (err.response.status === 401) {
-          errorMessage = 'Unauthorized - Vui lòng đăng nhập lại';
-        } else if (err.response.status === 400) {
-          errorMessage = err.response.data?.message || 'Bad Request';
-        } else if (err.response.data?.message.includes('Start date cannot be greater')) {
-          errorMessage = t('lottery.filters.startDateGreaterThanEndDate');
-        }else if (err.response.data?.message.includes('Unauthorized')) {
-          errorMessage = t('lottery.unauthorized');
-        }else if (err.response.data?.message.includes('should not be empty')) {
-          errorMessage = t('lottery.filters.shouldNotBeEmpty');
-        }else {
-          errorMessage = err.response.data?.message || `HTTP error! status: ${err.response.status}`;
-        }
-      } else if (err.request) {
-        // Network error
-        errorMessage = 'Không thể kết nối đến server. Vui lòng thử lại sau.';
-      } else {
-        // Other error
-        errorMessage = err.message || errorMessage;
+      let errorMessage = t('lottery.dataLoadError');
+
+      console.log("err", err.response.data?.message.includes('greater than'));
+
+      if (err.response.status === 401) {
+        errorMessage = t('lottery.unauthorized');
+      } else if (err.response.data?.message.includes('Start date cannot be greater than end date')) {
+        errorMessage = t('lottery.filters.startDateGreaterThanEndDate');
+      } else if (err.response.data?.message.includes('Unauthorized')) {
+        errorMessage = t('lottery.unauthorized');
+      } else if (err.response.data?.message.includes('should not be empty')) {
+        errorMessage = t('lottery.filters.shouldNotBeEmpty');
       }
-      
+
       toast.error(errorMessage);
       setData([]);
       setPagination(null);

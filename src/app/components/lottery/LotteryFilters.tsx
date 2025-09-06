@@ -47,7 +47,6 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
       stt: t('lottery.excel.headers.stt'),
       id: t('lottery.excel.headers.id'),
       code: t('lottery.excel.headers.code'),
-      userId: t('lottery.excel.headers.userId'),
       userName: t('lottery.excel.headers.userName'),
       telegramId: t('lottery.excel.headers.telegramId'),
       inputNumber: t('lottery.excel.headers.inputNumber'),
