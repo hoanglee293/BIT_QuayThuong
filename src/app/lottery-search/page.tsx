@@ -71,7 +71,7 @@ const LotterySearchPage = () => {
                             </h1>
                         </div>
                         <p className="text-gray-600 dark:text-gray-400 italic">
-                            {t('lottery.search.description') || 'Enter a lottery code to find its corresponding input number'}
+                            {t('lottery.search.description') || 'Enter a lottery code to find its corresponding BITT UID'}
                         </p>
                     </div>
 
@@ -122,7 +122,7 @@ const LotterySearchPage = () => {
                                         </p>
                                         <ul className="list-disc list-inside space-y-1 text-xs text-white">
                                             <li>{t('lottery.search.info1') || 'Enter the exact lottery code you want to search'}</li>
-                                            <li>{t('lottery.search.info2') || 'The system will return the corresponding input number'}</li>
+                                            <li>{t('lottery.search.info2') || 'The system will return the corresponding BITT UID'}</li>
                                             <li>{t('lottery.search.info3') || 'Only valid and existing codes will return results'}</li>
                                         </ul>
                                     </div>

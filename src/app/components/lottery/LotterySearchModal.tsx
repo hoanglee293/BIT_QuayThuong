@@ -67,7 +67,7 @@ const LotterySearchModal: React.FC<LotterySearchModalProps> = ({
                   {/* Input Number - Main Result */}
                   <div className="bg-theme-primary-500 text-white rounded-lg p-6">
                     <div className="text-base font-medium mb-2 opacity-90">
-                      UID
+                      BITT UID
                     </div>
                     <div className="text-3xl font-bold">
                       {lotteryData.input_number}

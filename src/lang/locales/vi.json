@@ -124,7 +124,7 @@
     },
     "search": {
       "title": "Mã dự thưởng",
-      "description": "Nhập mã dự thưởng để tìm số nhập tương ứng",
+      "description": "Nhập mã dự thưởng để tìm BITT UID tương ứng",
       "searchTitle": "Tìm kiếm theo mã",
       "codePlaceholder": "Nhập mã dự thưởng (ví dụ: 64372)",
       "searching": "Đang tìm kiếm...",
@@ -134,7 +134,7 @@
       "error": "Lỗi khi tìm kiếm mã dự thưởng",
       "infoTitle": "Cách sử dụng:",
       "info1": "Nhập chính xác mã dự thưởng bạn muốn tìm kiếm",
-      "info2": "Hệ thống sẽ trả về số nhập tương ứng",
+      "info2": "Hệ thống sẽ trả về BITT UID tương ứng",
       "info3": "Chỉ có mã hợp lệ và tồn tại mới trả về kết quả",
       "resultTitle": "Tìm thấy mã dự thưởng",
       "inputNumber": "BITT UID",
