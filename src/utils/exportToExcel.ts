@@ -11,10 +11,7 @@ export interface ExcelTranslations {
     userName: string;
     telegramId: string;
     inputNumber: string;
-    status: string;
     createdAt: string;
-    used: string;
-    unused: string;
   };
   sheets: {
     lotteryData: string;
@@ -55,10 +52,7 @@ export const exportToExcel = (
         userName: 'Tên User',
         telegramId: 'Telegram ID',
         inputNumber: 'Số nhập',
-        status: 'Trạng thái',
-        createdAt: 'Ngày tạo',
-        used: 'Đã sử dụng',
-        unused: 'Chưa sử dụng'
+        createdAt: 'Ngày tạo'
       },
       sheets: {
         lotteryData: 'Lottery Data',
@@ -86,7 +80,6 @@ export const exportToExcel = (
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
       [t.headers.inputNumber]: item.input_number,
-      [t.headers.status]: item.is_used ? t.headers.used : t.headers.unused,
       [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
         year: 'numeric',
         month: '2-digit',
@@ -110,7 +103,6 @@ export const exportToExcel = (
       { wch: 25 },  // Tên User
       { wch: 15 },  // Telegram ID
       { wch: 10 },  // Số nhập
-      { wch: 15 },  // Trạng thái
       { wch: 20 }   // Ngày tạo
     ];
     worksheet['!cols'] = columnWidths;
@@ -152,10 +144,7 @@ export const exportToExcelWithStats = (
         userName: 'Tên User',
         telegramId: 'Telegram ID',
         inputNumber: 'Số nhập',
-        status: 'Trạng thái',
-        createdAt: 'Ngày tạo',
-        used: 'Đã sử dụng',
-        unused: 'Chưa sử dụng'
+        createdAt: 'Ngày tạo'
       },
       sheets: {
         lotteryData: 'Lottery Data',
@@ -206,7 +195,6 @@ export const exportToExcelWithStats = (
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
       [t.headers.inputNumber]: item.input_number,
-      [t.headers.status]: item.is_used ? t.headers.used : t.headers.unused,
       [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
         year: 'numeric',
         month: '2-digit',
@@ -226,7 +214,6 @@ export const exportToExcelWithStats = (
       { wch: 25 },  // Tên User
       { wch: 15 },  // Telegram ID
       { wch: 10 },  // Số nhập
-      { wch: 15 },  // Trạng thái
       { wch: 20 }   // Ngày tạo
     ];
     dataWorksheet['!cols'] = columnWidths;
