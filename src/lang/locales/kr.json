@@ -72,6 +72,14 @@
       "used": "사용됨",
       "unused": "미사용",
       "na": "N/A"
+    },
+    "pagination": {
+      "page": "페이지",
+      "show": "표시",
+      "perPage": "/ 페이지",
+      "showing": "표시",
+      "of": "중",
+      "results": "결과"
     }
   },
   "languages": {

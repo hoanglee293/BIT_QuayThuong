@@ -72,6 +72,14 @@
       "used": "Used",
       "unused": "Unused",
       "na": "N/A"
+    },
+    "pagination": {
+      "page": "Page",
+      "show": "Show",
+      "perPage": "per page",
+      "showing": "Showing",
+      "of": "of",
+      "results": "results"
     }
   },
   "languages": {

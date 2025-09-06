@@ -84,7 +84,7 @@ const Lotterys = () => {
         {pagination && (
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-indigo-600/5 to-purple-600/5 rounded-2xl blur-2xl"></div>
-            <div className="relative bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl border border-white/20 dark:border-gray-700/50 px-8 shadow-lg shadow-inset dark:shadow-none dark:border-solid">
+            <div className="relative ">
               <LotteryPagination
                 pagination={pagination}
                 onPageChange={handlePageChange}

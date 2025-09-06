@@ -72,6 +72,14 @@
       "used": "使用済み",
       "unused": "未使用",
       "na": "N/A"
+    },
+    "pagination": {
+      "page": "ページ",
+      "show": "表示",
+      "perPage": "/ ページ",
+      "showing": "表示",
+      "of": "の",
+      "results": "結果"
     }
   },
   "languages": {

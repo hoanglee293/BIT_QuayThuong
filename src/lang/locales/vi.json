@@ -72,6 +72,14 @@
       "used": "Đã sử dụng",
       "unused": "Chưa sử dụng",
       "na": "N/A"
+    },
+    "pagination": {
+      "page": "Trang",
+      "show": "Hiển thị",
+      "perPage": "/ trang",
+      "showing": "Hiển thị",
+      "of": "trong",
+      "results": "kết quả"
     }
   },
   "languages": {

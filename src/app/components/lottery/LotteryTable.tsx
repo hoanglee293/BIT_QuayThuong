@@ -71,11 +71,11 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, tota
   }
 
   return (
-    <Card className="p-8 shadow-inset dark:shadow-none border-none dark:border-solid">
+    <div className="border-none">
       <div className="flex items-center justify-between w-full gap-2 text-2xl font-bold mb-5">{t('lottery.table.title')} <span className="text-xl text-theme-primary-500">
       {t('lottery.total')}: { total }</span></div>
       <CardContent>
-        <div className="overflow-x-auto bg-white dark:bg-black rounded-xl border border-white/20 dark:border-slate-700/50">
+        <div className="overflow-x-auto bg-gray-400 dark:bg-black rounded-xl border border-white/20 dark:border-slate-700/50 shadow-inset">
           <Table className="table-fixed w-full">
             <TableHeader className="rounded-t-xl">
               <TableRow className="bg-theme-primary-500 text-white">
@@ -89,7 +89,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, tota
             </TableHeader>
             <TableBody>
               {data.map((lottery) => (
-                <TableRow key={lottery.id}>
+                <TableRow key={lottery.id} className="bg-gray-100 dark:bg-gray-950 border-b border-gray-300 dark:border-gray-700">
                   <TableCell className="font-medium text-center">
                     {lottery.id}
                   </TableCell>
@@ -139,7 +139,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, tota
           </Table>
         </div>
       </CardContent>
-    </Card>
+    </div>
   );
 };
 
