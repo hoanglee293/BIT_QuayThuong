@@ -121,6 +121,18 @@
       }
     }
   },
+  "login": {
+    "title": "Đăng nhập",
+    "usernameOrEmail": "Username hoặc Email",
+    "usernameOrEmailPlaceholder": "Nhập username hoặc email",
+    "password": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu",
+    "loginButton": "Đăng nhập",
+    "loggingIn": "Đang đăng nhập...",
+    "loginSuccess": "Đăng nhập thành công!",
+    "loginFailed": "Đăng nhập thất bại",
+    "error": "Có lỗi xảy ra"
+  },
   "languages": {
     "korea": "Korea",
     "english": "English",

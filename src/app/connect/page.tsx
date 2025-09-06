@@ -41,10 +41,10 @@ const Connect = () => {
 
         try {
             await login(loginData.username_or_email, loginData.password);
-            toast.success('Đăng nhập thành công!');
+            toast.success(t('login.loginSuccess'));
             router.push('/');
         } catch (error: any) {
-            const errorMessage = error.response?.data?.message || 'Đăng nhập thất bại';
+            const errorMessage = t('login.loginFailed');
             toast.error(errorMessage);
         }
     };
@@ -58,27 +58,27 @@ const Connect = () => {
                 <Card className="w-full max-w-lg py-5 px-8 bg-white dark:bg-[#141414]">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white p-0">
-                            Login
+                            {t('login.title')}
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleLogin} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="username-or-email">Username hoặc Email</Label>
+                                <Label htmlFor="username-or-email">{t('login.usernameOrEmail')}</Label>
                                 <Input
                                     id="username-or-email"
                                     type="text"
-                                    placeholder="Nhập username hoặc email"
+                                    placeholder={t('login.usernameOrEmailPlaceholder')}
                                     value={loginData.username_or_email}
                                     onChange={(e) => setLoginData({ ...loginData, username_or_email: e.target.value })}
                                     required
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password">Mật khẩu</Label>
+                                <Label htmlFor="password">{t('login.password')}</Label>
                                 <PasswordInput
                                     id="password"
-                                    placeholder="Nhập mật khẩu"
+                                    placeholder={t('login.passwordPlaceholder')}
                                     value={loginData.password}
                                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                                     required
@@ -94,7 +94,7 @@ const Connect = () => {
                                 className="w-full bg-theme-primary-500 hover:bg-theme-primary-500"
                                 disabled={isLoading}
                             >
-                                {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+                                {isLoading ? t('login.loggingIn') : t('login.loginButton')}
                             </Button>
                         </form>
 

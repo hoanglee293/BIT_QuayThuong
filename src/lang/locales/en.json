@@ -121,6 +121,18 @@
       }
     }
   },
+  "login": {
+    "title": "Login",
+    "usernameOrEmail": "Username or Email",
+    "usernameOrEmailPlaceholder": "Enter username or email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "loginSuccess": "Login successful!",
+    "loginFailed": "Login failed",
+    "error": "An error occurred"
+  },
   "languages": {
     "korea": "Korea",
     "english": "English",

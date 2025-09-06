@@ -121,6 +121,18 @@
       }
     }
   },
+  "login": {
+    "title": "로그인",
+    "usernameOrEmail": "사용자명 또는 이메일",
+    "usernameOrEmailPlaceholder": "사용자명 또는 이메일을 입력하세요",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호를 입력하세요",
+    "loginButton": "로그인",
+    "loggingIn": "로그인 중...",
+    "loginSuccess": "로그인 성공!",
+    "loginFailed": "로그인 실패",
+    "error": "오류가 발생했습니다"
+  },
   "languages": {
     "korea": "한국어",
     "english": "영어",
