@@ -129,7 +129,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
     try {
       // Gọi API để lấy tất cả dữ liệu lottery
       const response = await axiosClient.get('/lotterys?get_all=true');
-      const allData = response.data.data.map((item: any) => item.is_used === false) || [];
+      const allData = response.data.data|| [];
 
       if (allData.length === 0) {
         alert(t('lottery.noDataToExport'));
