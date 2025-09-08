@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/ui/button';
 import { Input } from '@/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
 import { Search, Ticket, AlertCircle } from 'lucide-react';
 import { useLang } from '@/lang/useLang';
 import { axiosClient } from '@/utils/axiosClient';
 import { LotteryCode } from '@/types/lottery-types';
 import toast from 'react-hot-toast';
 import LotterySearchModal from '../components/lottery/LotterySearchModal';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 const LotterySearchPage = () => {
     const { t } = useLang();
@@ -17,6 +18,8 @@ const LotterySearchPage = () => {
     const [loading, setLoading] = useState(false);
     const [searchResult, setSearchResult] = useState<LotteryCode | null>(null);
     const [showModal, setShowModal] = useState(false);
+    const { isAuthenticated } = useAuth();
+    const router = useRouter();
 
     const handleSearch = async () => {
         if (!code.trim()) {
@@ -57,6 +60,12 @@ const LotterySearchPage = () => {
             handleSearch();
         }
     };
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            router.push('/connect');
+        }
+    }, [isAuthenticated, router]);
 
     return (
         <div className="h-svh bg-white dark:bg-black w-full">

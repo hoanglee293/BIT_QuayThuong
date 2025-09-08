@@ -129,7 +129,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
     try {
       // Gọi API để lấy tất cả dữ liệu lottery
       const response = await axiosClient.get('/lotterys?get_all=true');
-      const allData = response.data.data|| [];
+      const allData = response.data.data || [];
 
       if (allData.length === 0) {
         alert(t('lottery.noDataToExport'));
@@ -191,78 +191,6 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               />
             </div>
           </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">{t('lottery.filters.lotteryCode')}</label>
-            <Input
-              placeholder={t('lottery.filters.lotteryCodePlaceholder')}
-              value={filters.code || ''}
-              onChange={(e) => handleInputChange('code', e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="bg-background border-input text-foreground placeholder:text-muted-foreground"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">{t('lottery.filters.telegramId')}</label>
-            <Input
-              placeholder={t('lottery.filters.telegramIdPlaceholder')}
-              value={filters.telegram_id || ''}
-              onChange={(e) => handleInputChange('telegram_id', e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="bg-background border-input text-foreground placeholder:text-muted-foreground"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">{t('lottery.filters.uid')}</label>
-            <Input
-              placeholder={t('lottery.filters.uidPlaceholder')}
-              value={filters.input_number || ''}
-              onChange={(e) => handleInputChange('input_number', e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="bg-background border-input text-foreground placeholder:text-muted-foreground"
-            />
-          </div>
-          {/* <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">{t('lottery.filters.status')}</label>
-            <Select
-              value={filters.is_used || 'all'}
-              onValueChange={(value) => handleInputChange('is_used', value)}
-            >
-              <SelectTrigger className="bg-background border-input text-foreground">
-                <SelectValue placeholder={t('lottery.filters.statusPlaceholder')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('lottery.filters.all')}</SelectItem>
-                <SelectItem value="false">{t('lottery.filters.unused')}</SelectItem>
-                <SelectItem value="true">{t('lottery.filters.used')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div> */}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="flex items-end justify-between gap-2 w-full">
-            <div className="space-y-2 flex-1">
-              <label className="text-sm font-medium text-foreground">{t('lottery.filters.fromDate')}</label>
-              <Input
-                type="date"
-                value={filters.start_date || ''}
-                onChange={(e) => handleInputChange('start_date', e.target.value)}
-                className="bg-background border-input text-foreground"
-              />
-            </div>
-
-            <div className="space-y-2 flex-1">
-              <label className="text-sm font-medium text-foreground">{t('lottery.filters.toDate')}</label>
-              <Input
-                type="date"
-                value={filters.end_date || ''}
-                onChange={(e) => handleInputChange('end_date', e.target.value)}
-                className="bg-background border-input text-foreground"
-              />
-            </div>
-          </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">{t('lottery.filters.sortBy')}</label>
             <Select
@@ -316,31 +244,68 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               </SelectContent>
             </Select>
           </div>
+
+          {/* <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">{t('lottery.filters.status')}</label>
+            <Select
+              value={filters.is_used || 'all'}
+              onValueChange={(value) => handleInputChange('is_used', value)}
+            >
+              <SelectTrigger className="bg-background border-input text-foreground">
+                <SelectValue placeholder={t('lottery.filters.statusPlaceholder')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('lottery.filters.all')}</SelectItem>
+                <SelectItem value="false">{t('lottery.filters.unused')}</SelectItem>
+                <SelectItem value="true">{t('lottery.filters.used')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div> */}
         </div>
 
-        {/* Sort Options */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {/* Action Buttons */}
-          <div className="flex items-end h-full gap-2 pt-4">
-            <Button
-              onClick={handleSearch}
-              disabled={loading}
-              className="bg-theme-primary-500 text-primary-foreground text-white hover:bg-primary/90"
-            >
-              <Search className="h-4 w-4 mr-2" />
-              {t('lottery.filters.search')}
-            </Button>
-            <Button
-              variant="outline"
-              onClick={handleReset}
-              disabled={loading}
-              className="border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
-            >
-              <RotateCcw className="h-4 w-4 mr-2" />
-              {t('lottery.filters.reset')}
-            </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="flex items-end justify-between gap-2 w-full">
+            <div className="space-y-2 flex-1">
+              <label className="text-sm font-medium text-foreground">{t('lottery.filters.fromDate')}</label>
+              <Input
+                type="date"
+                value={filters.start_date || ''}
+                onChange={(e) => handleInputChange('start_date', e.target.value)}
+                className="bg-background border-input text-foreground"
+              />
+            </div>
+
+            <div className="space-y-2 flex-1">
+              <label className="text-sm font-medium text-foreground">{t('lottery.filters.toDate')}</label>
+              <Input
+                type="date"
+                value={filters.end_date || ''}
+                onChange={(e) => handleInputChange('end_date', e.target.value)}
+                className="bg-background border-input text-foreground"
+              />
+            </div>
           </div>
-          <div className="flex items-end justify-end gap-2 w-full" />
+          <div className="space-y-2 flex-1">
+            <div className="flex items-end h-full gap-2 pt-4">
+              <Button
+                onClick={handleSearch}
+                disabled={loading}
+                className="bg-theme-primary-500 text-primary-foreground text-white hover:bg-theme-primary-500/90"
+              >
+                <Search className="h-4 w-4 mr-2" />
+                {t('lottery.filters.search')}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                disabled={loading}
+                className="border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
+              >
+                <RotateCcw className="h-4 w-4 mr-2" />
+                {t('lottery.filters.reset')}
+              </Button>
+            </div>
+          </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">{t('lottery.exportFiltered')}</label>
             <div className="flex flex-col gap-2">
@@ -353,7 +318,6 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
                 <Download className="h-3 w-3" />
                 {t('lottery.exportFilteredData')}
               </Button>
-
             </div>
           </div>
           <div className="space-y-2">
@@ -368,6 +332,14 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
               {t('lottery.exportAllData')}
             </Button>
           </div>
+        </div>
+
+        {/* Sort Options */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {/* Action Buttons */}
+
+          <div className="flex items-end justify-end gap-2 w-full" />
+          
         </div>
 
 
