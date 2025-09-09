@@ -20,11 +20,20 @@ export const useLottery = (): UseLotteryReturn => {
   const [data, setData] = useState<LotteryCode[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [loading, setLoading] = useState(false);
+  
+  // Helper function to get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
   const [currentFilters, setCurrentFilters] = useState<LotteryFilters>({
     page: 1,
     limit: 10,
     sort_by: 'created_at',
-    sort_order: 'DESC'
+    sort_order: 'DESC',
+    start_date: getTodayDate(),
+    end_date: getTodayDate()
   });
 
   const buildQueryString = (filters: LotteryFilters): string => {

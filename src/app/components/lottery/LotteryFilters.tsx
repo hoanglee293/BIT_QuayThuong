@@ -25,11 +25,20 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   currentFilters
 }) => {
   const { t, lang } = useLang();
+  
+  // Helper function to get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
   const [filters, setFilters] = useState<LotteryFilters>({
     page: 1,
     limit: 10,
     sort_by: 'created_at',
-    sort_order: 'DESC'
+    sort_order: 'DESC',
+    start_date: getTodayDate(),
+    end_date: getTodayDate()
   });
 
   // Sync local state with currentFilters prop
