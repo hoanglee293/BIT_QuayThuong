@@ -5,11 +5,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { LotteryCode } from '@/types/lottery-types';
-import { format } from 'date-fns';
-import { vi } from 'date-fns/locale';
 import { Copy, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '@/ui/button';
 import { useLang } from '@/lang/useLang';
+import { formatDateWithOffset } from '@/utils/dateFormat';
 
 interface LotteryTableProps {
   data: LotteryCode[];
@@ -18,7 +17,7 @@ interface LotteryTableProps {
 }
 
 const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, total = 0 }) => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [copiedCode, setCopiedCode] = React.useState<string | null>(null);
 
   const handleCopyCode = async (code: string) => {
@@ -32,11 +31,7 @@ const LotteryTable: React.FC<LotteryTableProps> = ({ data, loading = false, tota
   };
 
   const formatDate = (dateString: string) => {
-    try {
-      return format(new Date(dateString), 'dd/MM/yyyy HH:mm', { locale: vi });
-    } catch {
-      return dateString;
-    }
+    return formatDateWithOffset(dateString, lang);
   };
 
   if (loading) {
