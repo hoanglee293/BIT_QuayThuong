@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
 import { LotteryCode } from '@/types/lottery-types';
+import { formatDateWithOffset, LangCodes } from './dateFormat';
 
 // Interface cho translations
 export interface ExcelTranslations {
@@ -33,12 +34,14 @@ export interface ExcelTranslations {
  * @param filename - Tên file Excel (mặc định: 'lottery_data.xlsx')
  * @param translations - Object chứa các bản dịch cho Excel
  * @param locale - Locale để format ngày tháng (mặc định: 'vi-VN')
+ * @param lang - Mã ngôn ngữ để format date theo múi giờ (mặc định: 'vi')
  */
 export const exportToExcel = (
   data: LotteryCode[], 
   filename: string = 'lottery_data.xlsx',
   translations?: ExcelTranslations,
-  locale: string = 'vi-VN'
+  locale: string = 'vi-VN',
+  lang: LangCodes = 'vi'
 ) => {
   try {
     // Sử dụng translations mặc định nếu không được cung cấp
@@ -77,14 +80,7 @@ export const exportToExcel = (
       [t.headers.inputNumber]: item.input_number,
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
-      [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      })
+      [t.headers.createdAt]: formatDateWithOffset(item.created_at, lang)
     }));
 
     // Tạo workbook và worksheet
@@ -95,11 +91,11 @@ export const exportToExcel = (
     const columnWidths = [
       { wch: 5 },   // STT
       { wch: 10 },  // ID
-      { wch: 20 },  // Mã Code
+      { wch: 15 },  // Mã Code
       { wch: 10 },  // Số nhập
-      { wch: 25 },  // Tên User
+      { wch: 20 },  // Tên User
       { wch: 15 },  // Telegram ID
-      { wch: 20 }   // Ngày tạo
+      { wch: 40 }   // Ngày tạo
     ];
     worksheet['!cols'] = columnWidths;
 
@@ -122,12 +118,14 @@ export const exportToExcel = (
  * @param filename - Tên file Excel (mặc định: 'lottery_report.xlsx')
  * @param translations - Object chứa các bản dịch cho Excel
  * @param locale - Locale để format ngày tháng (mặc định: 'vi-VN')
+ * @param lang - Mã ngôn ngữ để format date theo múi giờ (mặc định: 'vi')
  */
 export const exportToExcelWithStats = (
   data: LotteryCode[], 
   filename: string = 'lottery_report.xlsx',
   translations?: ExcelTranslations,
-  locale: string = 'vi-VN'
+  locale: string = 'vi-VN',
+  lang: LangCodes = 'vi'
 ) => {
   try {
     // Sử dụng translations mặc định nếu không được cung cấp
@@ -174,7 +172,7 @@ export const exportToExcelWithStats = (
       [t.stats.remainingCodes, availableCodes],
       [t.stats.usageRate, `${usageRate}%`],
       [''],
-      [t.stats.exportDate, new Date().toLocaleString(locale)]
+      [t.stats.exportDate, formatDateWithOffset(new Date(), lang)]
     ];
 
     const statsWorksheet = XLSX.utils.aoa_to_sheet(statsData);
@@ -189,14 +187,7 @@ export const exportToExcelWithStats = (
       [t.headers.inputNumber]: item.input_number,
       [t.headers.userName]: item.user.name,
       [t.headers.telegramId]: item.user.telegram_id,
-      [t.headers.createdAt]: new Date(item.created_at).toLocaleString(locale, {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      })
+      [t.headers.createdAt]: formatDateWithOffset(item.created_at, lang)
     }));
 
     const dataWorksheet = XLSX.utils.json_to_sheet(excelData);

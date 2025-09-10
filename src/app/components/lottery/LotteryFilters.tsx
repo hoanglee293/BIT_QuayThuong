@@ -126,7 +126,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
     const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
     const filename = `lottery_data_${timestamp}.xlsx`;
 
-    const success = exportToExcel(data, filename, createTranslations(), getLocale());
+    const success = exportToExcel(data, filename, createTranslations(), getLocale(), lang);
     if (success) {
       alert(t('lottery.exportSuccess'));
     } else {
@@ -148,7 +148,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
       const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
       const filename = `lottery_all_data_${timestamp}.xlsx`;
 
-      const success = exportToExcel(allData, filename, createTranslations(), getLocale());
+      const success = exportToExcel(allData, filename, createTranslations(), getLocale(), lang);
       if (success) {
         alert(t('lottery.exportAllSuccess', { count: allData.length }));
       } else {

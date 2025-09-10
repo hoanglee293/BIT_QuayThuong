@@ -2,6 +2,9 @@ import { format, Locale } from 'date-fns';
 import { vi, enUS, ko, ja } from 'date-fns/locale';
 import { LangCodes } from '@/lang';
 
+// Re-export LangCodes for use in other files
+export type { LangCodes };
+
 // Mapping múi giờ cho từng quốc gia
 const TIMEZONE_MAP: Record<LangCodes, string> = {
   'vi': 'Asia/Ho_Chi_Minh', // UTC+7
