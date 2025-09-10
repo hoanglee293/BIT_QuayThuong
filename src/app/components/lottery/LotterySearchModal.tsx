@@ -18,6 +18,7 @@ import {
   X
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { formatDateWithOffset } from '@/utils/dateFormat';
 
 interface LotterySearchModalProps {
   lotteryData: LotteryCode;
@@ -30,7 +31,7 @@ const LotterySearchModal: React.FC<LotterySearchModalProps> = ({
   isOpen,
   onClose
 }) => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -41,7 +42,7 @@ const LotterySearchModal: React.FC<LotterySearchModalProps> = ({
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString();
+    return formatDateWithOffset(dateString, lang);
   };
 
   return (
