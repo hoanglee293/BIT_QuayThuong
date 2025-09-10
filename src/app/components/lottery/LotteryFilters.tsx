@@ -117,20 +117,59 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
   };
 
   // Handle Excel export
-  const handleExportExcel = () => {
-    if (!data || data.length === 0) {
-      alert(t('lottery.noDataToExport'));
-      return;
-    }
+  const handleExportExcel = async () => {
+    try {
+      // Tạo query parameters từ bộ lọc hiện tại
+      const queryParams = new URLSearchParams();
+      
+      // Thêm các tham số bộ lọc vào query
+      if (filters.search) queryParams.append('search', filters.search);
+      if (filters.sort_by) queryParams.append('sort_by', filters.sort_by);
+      if (filters.sort_order) queryParams.append('sort_order', filters.sort_order);
+      if (filters.start_date) queryParams.append('start_date', filters.start_date);
+      if (filters.end_date) queryParams.append('end_date', filters.end_date);
+      if (filters.is_used !== undefined) queryParams.append('is_used', filters.is_used.toString());
+      
+      // Thêm get_all=true để lấy tất cả dữ liệu theo bộ lọc
+      queryParams.append('get_all', 'true');
+      
+      // Gọi API với bộ lọc
+      const response = await axiosClient.get(`/lotterys?${queryParams.toString()}`);
+      const filteredData = response.data.data || [];
 
-    const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-    const filename = `lottery_data_${timestamp}.xlsx`;
+      if (filteredData.length === 0) {
+        alert(t('lottery.noDataToExport'));
+        return;
+      }
 
-    const success = exportToExcel(data, filename, createTranslations(), getLocale(), lang);
-    if (success) {
-      alert(t('lottery.exportSuccess'));
-    } else {
-      alert(t('lottery.exportError'));
+      const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+      const filename = `lottery_filtered_data_${timestamp}.xlsx`;
+
+      const success = exportToExcel(filteredData, filename, createTranslations(), getLocale(), lang);
+      if (success) {
+        alert(t('lottery.exportSuccess'));
+      } else {
+        alert(t('lottery.exportError'));
+      }
+    } catch (error: any) {
+      console.error('Error fetching filtered lottery data:', error);
+      let errorMessage = t('lottery.dataLoadError');
+
+      if (error.response) {
+        if (error.response.status === 401) {
+          errorMessage = t('lottery.unauthorized');
+        } else if (error.response.status === 400) {
+          errorMessage = error.response.data?.message || t('lottery.badRequest');
+        } else {
+          errorMessage = error.response.data?.message || `HTTP error! status: ${error.response.status}`;
+        }
+      } else if (error.request) {
+        errorMessage = t('lottery.connectionError');
+      } else {
+        errorMessage = error.message || errorMessage;
+      }
+
+      alert(errorMessage);
     }
   };
 
@@ -320,7 +359,7 @@ const LotteryFiltersComponent: React.FC<LotteryFiltersProps> = ({
             <div className="flex flex-col gap-2">
               <Button
                 onClick={handleExportExcel}
-                disabled={loading || !data || data.length === 0}
+                disabled={loading}
                 className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs p-2 h-10"
                 size="sm"
               >
