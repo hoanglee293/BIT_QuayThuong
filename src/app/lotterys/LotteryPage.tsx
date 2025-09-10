@@ -46,7 +46,7 @@ const Lotterys = () => {
 
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black w-full">
+    <div className="flex-1 bg-white dark:bg-black w-full">
       {/* Header Section */}
       <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Filters */}
